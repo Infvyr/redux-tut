@@ -43,6 +43,8 @@
     "@babel/eslint-parser": "^7.19.1",
     "@babel/preset-react": "^7.18.6",
     "autoprefixer": "^10.4.12",
+    "cssnano": "^5.1.13",
+    "cssnano-preset-advanced": "^5.3.8",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-jsconfig": "^1.1.0",

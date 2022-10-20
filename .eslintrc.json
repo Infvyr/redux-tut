@@ -50,6 +50,7 @@
       }
     ],
     "react/no-unescaped-entities": "off",
+    "react/prop-types": "off",
     "react/require-default-props": "error",
     "sort-imports": [
       "error",
