@@ -3,15 +3,16 @@ import { ReactComponent as ReactLogo } from 'assets/react.svg';
 
 function Sidebar() {
 	const setActiveLink = isActive => {
-		let activeClassName = 'bg-amber-100 text-black';
+		let defaultLinkClassName = 'nav-link';
+		let activeLinkClassName = 'bg-amber-100 text-black';
 
 		return isActive
-			? `block px-5 py-2 group-hover:bg-amber-100 transition-colors duration-300 ${activeClassName}`
-			: 'block px-5 py-2 group-hover:bg-amber-100 transition-colors duration-300';
+			? `${defaultLinkClassName} ${activeLinkClassName}`
+			: defaultLinkClassName;
 	};
 
 	return (
-		<aside className="bg-amber-50 p-5 shadow">
+		<aside className="sidebar">
 			<div className="mt-2 mb-14 h-20 flex justify-center">
 				<ReactLogo className="motion-safe:animate-customSpin" />
 			</div>
@@ -30,7 +31,6 @@ function Sidebar() {
 						<NavLink
 							to="redux"
 							className={({ isActive }) => setActiveLink(isActive)}
-							end
 						>
 							Redux
 						</NavLink>

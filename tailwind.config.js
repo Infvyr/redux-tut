@@ -3,6 +3,9 @@ module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	theme: {
 		extend: {
+			transitionDuration: {
+				DEFAULT: '300ms',
+			},
 			colors: {
 				amber: {
 					50: 'rgb(250, 247, 244)',
@@ -15,5 +18,5 @@ module.exports = {
 		},
 	},
 	plugins: [],
-	darkMode: 'class',
+	// darkMode: 'class',
 };

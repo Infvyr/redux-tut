@@ -1,3 +1,4 @@
+import PageHeader from 'components/PageHeader';
 import {
 	decrement,
 	increment,
@@ -29,7 +30,8 @@ function Counter() {
 
 	return (
 		<div>
-			<h1 className="text-3xl font-bold underline">Simple Counter</h1>
+			<PageHeader backTo={-1} />
+
 			<header>
 				<button onClick={onDecrement}>-</button>
 				<input type="text" readOnly value={count} />
