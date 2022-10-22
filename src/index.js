@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const LazyNotFoundPage = lazy(() => import('pages/Error/NotFoundPage'));
-const LazyCounter = lazy(() => import('components/Counter'));
+const LazyCounter = lazy(() => import('features/counter/component/Counter'));
 
 const router = createBrowserRouter([
 	{

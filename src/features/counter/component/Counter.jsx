@@ -4,7 +4,7 @@ import {
 	increment,
 	incrementByAmount,
 	resetAll,
-} from 'features/counter/counterSlice';
+} from 'features/counter/slices/counterSlice';
 import { PowerReset as ResetIcon } from 'grommet-icons/icons/PowerReset';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
