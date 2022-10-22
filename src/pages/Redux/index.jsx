@@ -1,5 +1,5 @@
 import PageHeader from 'components/PageHeader';
-import ProjectItem from 'features/redux/components/ProjectItem';
+import ProjectItem from 'features/redux/components/Project/ProjectItem';
 import Space from 'components/Space';
 import { PROJECTS } from 'pages/Redux/data';
 

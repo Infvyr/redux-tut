@@ -1,11 +1,12 @@
 import { ReactComponent as ReactLogo } from 'assets/images/react.svg';
 import Navbar from 'features/menu/component/Navbar';
+import styles from './Sidebar.module.css';
 
 function Sidebar() {
 	return (
-		<aside className="sidebar">
-			<div className="mt-2 mb-14 h-20 flex justify-center">
-				<ReactLogo className="motion-safe:animate-customSpin" />
+		<aside className={styles.sidebar}>
+			<div className={styles['logo-wrapper']}>
+				<ReactLogo className={styles.logo} />
 			</div>
 
 			<Navbar />

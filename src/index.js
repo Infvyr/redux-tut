@@ -1,6 +1,6 @@
 import App from 'App';
 import { store } from 'app/redux/store';
-import Index from 'pages/Dash';
+import Dash from 'pages/Dash';
 import ReduxIndexPage from 'pages/Redux';
 import { lazy, StrictMode, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Index />,
+				element: <Dash />,
 			},
 			{
 				path: 'redux',

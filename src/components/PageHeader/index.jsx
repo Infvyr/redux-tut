@@ -1,6 +1,7 @@
 import { FormPrevious } from 'grommet-icons';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import styles from './PageHeader.module.css';
 
 function PageHeader({ backTo = '/' }) {
 	const navigate = useNavigate();
@@ -29,12 +30,12 @@ function PageHeader({ backTo = '/' }) {
 
 	return (
 		<section className="card">
-			<div className="flex flex-wrap gap-y-4 gap-x-10">
+			<div className={styles.wrapper}>
 				<button className="button-default" onClick={navigateBackTo('/')}>
 					<FormPrevious color="white" size="21px" />
 					Back
 				</button>
-				<h1 className="page-title">{pageTitle}</h1>
+				<h1 className={styles.title}>{pageTitle}</h1>
 			</div>
 		</section>
 	);

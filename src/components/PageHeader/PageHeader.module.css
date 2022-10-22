@@ -1,0 +1,7 @@
+.wrapper {
+    @apply flex flex-wrap gap-y-4 gap-x-10
+}
+
+.title {
+    @apply text-xl md:text-3xl
+}

@@ -1,4 +1,4 @@
-import MainLayout from 'layout/MainLayout';
+import MainLayout from 'layout/Main/MainLayout';
 import Sidebar from 'layout/Sidebar';
 
 function App() {

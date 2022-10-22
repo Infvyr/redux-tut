@@ -1,6 +1,8 @@
+import styles from 'features/menu/component/Navbar/Navbar.module.css';
+
 const setActiveLink = isActive => {
-	let defaultLinkClassName = 'nav-link';
-	let activeLinkClassName = 'bg-amber-100 text-black';
+	let defaultLinkClassName = styles['nav-link'];
+	let activeLinkClassName = styles.active;
 
 	return isActive
 		? `${defaultLinkClassName} ${activeLinkClassName}`

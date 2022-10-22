@@ -1,6 +1,7 @@
 import { setActiveLink } from 'app/utils/menu';
 import { MENU_ITEMS } from 'layout/data/menu';
 import { NavLink } from 'react-router-dom';
+import styles from './Navbar.module.css';
 
 function Navbar() {
 	if (MENU_ITEMS.length === 0) {
@@ -9,18 +10,16 @@ function Navbar() {
 
 	return (
 		<nav>
-			<ul className="flex flex-col gap-y-2">
+			<ul className={styles.ul}>
 				{!!MENU_ITEMS.length &&
 					MENU_ITEMS.map(({ key, name, url, icon }) => (
-						<li key={key} className="group">
+						<li key={key} className={styles.li}>
 							<NavLink
 								to={url}
 								className={({ isActive }) => setActiveLink(isActive)}
-								end
+								end={url === '/'}
 							>
-								<span className="w-5 h-5 inline-flex place-items-center">
-									{icon}
-								</span>
+								<span className={styles.icon}>{icon}</span>
 								<span>{name}</span>
 							</NavLink>
 						</li>

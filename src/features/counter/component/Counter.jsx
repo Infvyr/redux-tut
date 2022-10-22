@@ -1,4 +1,6 @@
+import Button from 'components/Button';
 import PageHeader from 'components/PageHeader';
+import Space from 'components/Space';
 import {
 	decrement,
 	increment,
@@ -8,6 +10,7 @@ import {
 import { PowerReset as ResetIcon } from 'grommet-icons/icons/PowerReset';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styles from './Counter.module.css';
 
 const initialAmount = '3';
 
@@ -31,19 +34,44 @@ function Counter() {
 	return (
 		<div>
 			<PageHeader backTo={-1} />
+			<Space />
 
-			<header>
-				<button onClick={onDecrement}>-</button>
-				<input type="text" readOnly value={count} />
-				<button onClick={onIncrement}>+</button>
-			</header>
-			<footer>
-				<input type="text" value={amount} onChange={onInputChange} />
-				<button onClick={onIncrementByAmount}>Add {amount || ''}</button>
-				<button onClick={onReset}>
-					<ResetIcon />
-				</button>
-			</footer>
+			<div className="card h-screen">
+				<header className={styles.group}>
+					<Button
+						title="Decrement by 1"
+						aria-label="Decrement"
+						onClick={onDecrement}
+					>
+						-
+					</Button>
+					<input
+						type="text"
+						readOnly
+						value={count}
+						className={styles['input--readonly']}
+					/>
+					<Button
+						title="Increment by 1"
+						aria-label="Increment"
+						onClick={onIncrement}
+					>
+						+
+					</Button>
+				</header>
+
+				<Space />
+
+				<footer className={styles.group}>
+					<input type="text" value={amount} onChange={onInputChange} />
+					<Button aria-label="Add amount" onClick={onIncrementByAmount}>
+						Add {amount || ''}
+					</Button>
+					<Button title="Reset all" aria-label="Reset" onClick={onReset}>
+						<ResetIcon color="white" size="20" />
+					</Button>
+				</footer>
+			</div>
 		</div>
 	);
 }

@@ -6,12 +6,12 @@ export const MENU_ITEMS = [
 		key: 'dash',
 		name: 'Dash',
 		url: '/',
-		icon: <Dashboard className="menu-item-icon" size="20" />,
+		icon: <Dashboard size="20" />,
 	},
 	{
 		key: 'redux',
 		name: 'Redux',
 		url: 'redux',
-		icon: <Redux className="menu-item-icon" />,
+		icon: <Redux />,
 	},
 ];
