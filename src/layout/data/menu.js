@@ -1,4 +1,4 @@
-import { ReactComponent as Redux } from 'assets/redux.svg';
+import { ReactComponent as Redux } from 'assets/images/redux.svg';
 import { Dashboard } from 'grommet-icons';
 
 export const MENU_ITEMS = [

@@ -10,6 +10,10 @@
 	h1, h2, h3, h4, h5, h6, p, div, span {
 		@apply dark:text-white
 	}
+
+	a {
+		@apply duration-300
+	}
 }
 
 @layer components {
@@ -34,7 +38,7 @@
 	}
 
 	.nav-link {
-		@apply flex items-center gap-x-2 px-5 py-2 group-hover:bg-amber-100 transition-colors duration-300 dark:text-white dark:group-hover:bg-gray-700 dark:group-hover:text-white
+		@apply flex items-center gap-x-2 px-5 py-2 group-hover:bg-amber-100 transition-colors dark:text-white dark:group-hover:bg-gray-700 dark:group-hover:text-white
 	}
 
 	.nav-link span {
@@ -76,7 +80,7 @@
 	}
 
 	svg[aria-label="Folder"] {
-		@apply fill-blue-600 stroke-gray-700 dark:fill-white dark:stroke-white group-hover:stroke-gray-800 dark:group-hover:stroke-gray-300 transition-colors
+		@apply fill-blue-600 stroke-gray-700 dark:fill-white dark:stroke-white group-hover:stroke-white dark:group-hover:stroke-gray-300 transition-colors
 	}
 
 	svg[aria-label="Folder"] path {

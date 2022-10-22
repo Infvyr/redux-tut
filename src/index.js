@@ -1,5 +1,5 @@
 import App from 'App';
-import { store } from 'app/store';
+import { store } from 'app/redux/store';
 import Index from 'pages/Dash';
 import ReduxIndexPage from 'pages/Redux';
 import { lazy, StrictMode, Suspense } from 'react';

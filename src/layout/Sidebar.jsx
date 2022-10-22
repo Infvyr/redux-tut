@@ -1,4 +1,4 @@
-import { ReactComponent as ReactLogo } from 'assets/react.svg';
+import { ReactComponent as ReactLogo } from 'assets/images/react.svg';
 import Navbar from 'features/menu/component/Navbar';
 
 function Sidebar() {
