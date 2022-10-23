@@ -40,7 +40,6 @@
   "rules": {
     "prettier/prettier": ["error", { "singleQuote": true }],
     "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single", { "avoidEscape": true }],
     "semi": ["error", "always"],
     "no-trailing-spaces": "error",
     "no-console": "off",
