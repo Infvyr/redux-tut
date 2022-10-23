@@ -9,7 +9,8 @@ import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const LazyNotFoundPage = lazy(() => import('pages/Error/NotFoundPage'));
-const LazyCounter = lazy(() => import('features/counter/component/Counter'));
+const LazyCounter = lazy(() => import('features/counter/view/Counter'));
+const LazyPosts = lazy(() => import('features/posts/view/Posts'));
 
 const router = createBrowserRouter([
 	{
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
 				element: (
 					<Suspense fallback={<p>Loading...</p>}>
 						<LazyCounter />
+					</Suspense>
+				),
+			},
+			{
+				path: 'redux/posts',
+				element: (
+					<Suspense fallback={<p>Loading...</p>}>
+						<LazyPosts />
 					</Suspense>
 				),
 			},

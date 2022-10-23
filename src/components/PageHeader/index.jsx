@@ -1,3 +1,4 @@
+import Button from 'components/Button';
 import { FormPrevious } from 'grommet-icons';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -31,10 +32,13 @@ function PageHeader({ backTo = '/' }) {
 	return (
 		<section className="card">
 			<div className={styles.wrapper}>
-				<button className="button-default" onClick={navigateBackTo('/')}>
+				<Button
+					className={`btn-primary ${styles.button}`}
+					onClick={navigateBackTo('/')}
+				>
 					<FormPrevious color="white" size="21px" />
 					Back
-				</button>
+				</Button>
 				<h1 className={styles.title}>{pageTitle}</h1>
 			</div>
 		</section>

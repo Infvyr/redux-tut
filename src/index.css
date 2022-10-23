@@ -11,6 +11,26 @@
 		@apply dark:text-white
 	}
 
+	h1 {
+		@apply text-xl md:text-3xl
+	}
+
+	h2 {
+		@apply text-lg md:text-2xl
+	}
+
+	h3 {
+		@apply text-[1.05rem] md:text-xl
+	}
+
+	input, textarea, select {
+		@apply text-gray-900
+	}
+
+	label {
+		@apply cursor-pointer
+	}
+
 	a {
 		@apply duration-300
 	}
@@ -18,11 +38,11 @@
 
 @layer components {
 	#root {
-		@apply block sm:grid grid-cols-[300px_1fr] h-screen
+		@apply block sm:grid md:grid-cols-[300px_1fr] min-h-screen
 	}
 
 	.card {
-		@apply p-5 bg-white rounded border border-gray-200 shadow dark:bg-slate-800 dark:border-gray-700
+		@apply p-5 xl:p-8 bg-white rounded border border-gray-200 shadow dark:bg-slate-800 dark:border-gray-700
 	}
 
 	svg[aria-label="Folder"] {
@@ -33,16 +53,32 @@
 		@apply stroke-1 !fill-blue-600
 	}
 
-	.button-default {
-		@apply w-full md:w-24 min-h-full order-1 md:-order-1
-	}
-
 	button,
 	button[type='button'] {
-		@apply inline-flex items-center justify-center px-4 bg-blue-600 min-h-[36px] rounded text-white transition-colors hover:bg-blue-700
+		@apply inline-flex items-center justify-center px-4 min-h-[40px] md:min-h-[36px] rounded cursor-pointer transition-colors
 	}
 
-	input {
-		@apply px-3 min-h-[34px] text-gray-900 rounded
+	.btn-primary {
+		@apply bg-blue-600 hover:bg-blue-700 text-white
+	}
+
+	.btn-danger {
+		@apply bg-red-600 hover:bg-red-700 text-white
+	}
+
+	.btn-transparent {
+		@apply bg-transparent
+	}
+
+	input, select, textarea {
+		@apply px-2 rounded border border-gray-900
+	}
+
+	input, select {
+		@apply min-h-[34px]
+	}
+
+	textarea {
+		@apply min-h-[160px] py-1
 	}
 }

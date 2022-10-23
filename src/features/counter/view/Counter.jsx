@@ -39,6 +39,7 @@ function Counter() {
 			<div className="card h-screen">
 				<header className={styles.group}>
 					<Button
+						className="btn-danger"
 						title="Decrement by 1"
 						aria-label="Decrement"
 						onClick={onDecrement}
@@ -52,6 +53,7 @@ function Counter() {
 						className={styles['input--readonly']}
 					/>
 					<Button
+						className="btn-primary"
 						title="Increment by 1"
 						aria-label="Increment"
 						onClick={onIncrement}
@@ -64,10 +66,19 @@ function Counter() {
 
 				<footer className={styles.group}>
 					<input type="text" value={amount} onChange={onInputChange} />
-					<Button aria-label="Add amount" onClick={onIncrementByAmount}>
+					<Button
+						className="btn-primary"
+						aria-label="Add amount"
+						onClick={onIncrementByAmount}
+					>
 						Add {amount || ''}
 					</Button>
-					<Button title="Reset all" aria-label="Reset" onClick={onReset}>
+					<Button
+						className="btn-danger"
+						title="Reset all"
+						aria-label="Reset"
+						onClick={onReset}
+					>
 						<ResetIcon color="white" size="20" />
 					</Button>
 				</footer>

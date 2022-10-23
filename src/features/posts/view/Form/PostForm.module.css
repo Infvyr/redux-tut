@@ -1,0 +1,23 @@
+.section-title {
+    @apply md:text-3xl
+}
+
+.form {
+    @apply lg:max-w-xl
+}
+
+.form-group {
+    @apply flex flex-col gap-y-1 mb-2 last:mb-0
+}
+
+.label {
+    @apply inline-block text-lg
+}
+
+.footer {
+    @apply my-5
+}
+
+.submit {
+    @apply w-full
+}

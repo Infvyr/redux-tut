@@ -3,5 +3,5 @@
 }
 
 .input--readonly {
-    @apply cursor-default outline-0 border-0 select-none
+    @apply cursor-default outline-0 select-none
 }
