@@ -1,7 +1,7 @@
-import { setActiveLink } from 'app/utils/menu';
+import { setActiveLink } from 'app/utils/Menu';
 import { MENU_ITEMS } from 'layout/data/menu';
 import { NavLink } from 'react-router-dom';
-import styles from './Navbar.module.css';
+import styles from 'layout/Menu/view/Navbar/Navbar.module.css';
 
 function Navbar() {
 	if (MENU_ITEMS.length === 0) {

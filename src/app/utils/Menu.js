@@ -1,4 +1,4 @@
-import styles from 'features/menu/view/Navbar/Navbar.module.css';
+import styles from 'layout/Menu/view/Navbar/Navbar.module.css';
 
 const setActiveLink = isActive => {
 	let defaultLinkClassName = styles['nav-link'];

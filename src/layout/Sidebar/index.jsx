@@ -1,5 +1,5 @@
 import { ReactComponent as ReactLogo } from 'assets/images/react.svg';
-import Navbar from 'features/menu/view/Navbar';
+import Navbar from 'layout/Menu/view/Navbar';
 import styles from './Sidebar.module.css';
 
 function Sidebar() {
