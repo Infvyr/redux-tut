@@ -1,11 +1,11 @@
 .sidebar {
-    @apply flex flex-col gap-y-7 md:gap-y-10 h-full bg-amber-50 px-5 py-8 shadow dark:bg-gray-800
+	@apply flex flex-col gap-y-7 md:gap-y-10 h-full bg-amber-50 px-5 py-8 shadow dark:bg-gray-800;
 }
 
 .logo-wrapper {
-    @apply h-20 flex justify-center
+    @apply h-20 flex justify-center;
 }
 
 .logo {
-    @apply motion-safe:animate-customSpin
+    @apply motion-safe:animate-customSpin;
 }

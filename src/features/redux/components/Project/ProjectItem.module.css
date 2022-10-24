@@ -1,19 +1,19 @@
 .wrapper {
-    @apply flex flex-col items-start gap-y-2
+	@apply flex flex-col items-start gap-y-2;
 }
 
 .title {
-    @apply text-lg md:text-2xl text-center
+    @apply text-lg md:text-2xl text-center;
 }
 
 .link {
-    @apply p-5 rounded transition-colors
+    @apply p-5 rounded transition-colors;
 }
 
 .wrapper:hover .title {
-    @apply dark:text-gray-300
+    @apply dark:text-gray-300;
 }
 
 .wrapper:hover .link {
-    @apply bg-amber-100 dark:bg-slate-700
+    @apply bg-amber-100 dark:bg-slate-700;
 }

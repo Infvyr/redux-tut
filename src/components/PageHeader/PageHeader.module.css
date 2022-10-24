@@ -1,11 +1,11 @@
 .wrapper {
-    @apply flex flex-wrap gap-y-4 gap-x-10
+	@apply flex flex-wrap gap-y-4 gap-x-10;
 }
 
 .title {
-    @apply text-xl md:text-3xl
+	@apply text-xl md:text-3xl;
 }
 
 .button {
-    @apply w-full md:w-24 min-h-full order-1 md:-order-1
+	@apply w-full md:w-24 min-h-full order-1 md:-order-1;
 }

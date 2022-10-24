@@ -1,61 +1,61 @@
 .ul {
-    @apply flex flex-col gap-y-2
+	@apply flex flex-col gap-y-2;
 }
 
 .nav-link {
-    @apply flex items-center gap-x-2 px-5 py-2 transition-colors dark:text-white
+    @apply flex items-center gap-x-2 px-5 py-2 transition-colors dark:text-white;
 }
 
 .nav-link span {
-    @apply last:dark:text-gray-400
+    @apply last:dark:text-gray-400;
 }
 
 .nav-link[aria-current='page'] {
-    @apply dark:bg-gray-700 dark:text-white
+    @apply dark:bg-gray-700 dark:text-white;
 }
 
 .nav-link[aria-current='page'] span {
-    @apply last:dark:text-white
+    @apply last:dark:text-white;
 }
 
 .nav-link svg > g,
 .nav-link svg > path {
-    @apply dark:!stroke-gray-400
+    @apply dark:!stroke-gray-400;
 }
 
 .nav-link svg > g {
-    @apply dark:fill-gray-400
+    @apply dark:fill-gray-400;
 }
 
 .nav-link[aria-current='page'] svg > g,
 .nav-link[aria-current='page'] svg > path {
-    @apply dark:!stroke-white
+    @apply dark:!stroke-white;
 }
 
 .nav-link[aria-current='page'] svg > g {
-    @apply dark:fill-white
+    @apply dark:fill-white;
 }
 
 .icon {
-    @apply w-5 h-5 inline-flex place-items-center
+    @apply w-5 h-5 inline-flex place-items-center;
 }
 
 .active {
-    @apply bg-amber-100 text-black
+    @apply bg-amber-100 text-black;
 }
 
 .li:hover .nav-link {
-    @apply bg-amber-100 dark:bg-gray-700 dark:text-white
+    @apply bg-amber-100 dark:bg-gray-700 dark:text-white;
 }
 
 .li:hover .nav-link span {
-    @apply last:dark:text-white
+    @apply last:dark:text-white;
 }
 
 .li:hover .nav-link svg > g {
-    @apply dark:fill-white
+    @apply dark:fill-white;
 }
 
 .li:hover .nav-link svg > path {
-    @apply dark:!stroke-white
+    @apply dark:!stroke-white;
 }

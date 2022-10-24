@@ -1,7 +1,7 @@
 .group {
-    @apply flex items-center gap-x-2
+	@apply flex items-center gap-x-2;
 }
 
 .input--readonly {
-    @apply cursor-default outline-0 select-none
+	@apply cursor-default outline-0 select-none;
 }
