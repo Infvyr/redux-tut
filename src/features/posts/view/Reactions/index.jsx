@@ -1,35 +1,40 @@
 import Button from 'components/Button';
+import { reactionAdded } from 'features/posts/slices/postsSlice';
 import { Favorite, Java, Like, Sign } from 'grommet-icons';
+import { useDispatch } from 'react-redux';
 
-function Reactions({ reactions }) {
-	const { like, heart, cool, coffee } = reactions;
+const reactionsIcons = {
+	like: <Like size="18" />,
+	heart: <Favorite size="18" />,
+	cool: <Sign size="18" />,
+	coffee: <Java size="18" />,
+};
+
+function Reactions({ post }) {
+	const dispatch = useDispatch();
+
+	const handleReaction = (post, name) => () =>
+		dispatch(reactionAdded({ postId: post.id, reaction: name }));
+
+	const reactionsButtons = Object.entries(reactionsIcons).map(
+		([name, icon]) => {
+			return (
+				<div key={name} className="inline-flex items-center gap-x-1 w-14">
+					<Button
+						className="btn-transparent !px-1"
+						onClick={handleReaction(post, name)}
+					>
+						{icon}
+					</Button>
+					<span>{post.reactions[name]}</span>
+				</div>
+			);
+		}
+	);
 
 	return (
 		<div className="features inline-flex items-center gap-x-2 flex-wrap">
-			<div className="inline-flex items-center gap-x-1">
-				<Button className="btn-transparent">
-					<Like size="18" />
-				</Button>
-				<span>{like}</span>
-			</div>
-			<div className="inline-flex items-center gap-x-1">
-				<Button className="">
-					<Favorite size="18" />
-				</Button>
-				<span>{heart}</span>
-			</div>
-			<div className="inline-flex items-center gap-x-1">
-				<Button className="">
-					<Sign size="18" />
-				</Button>
-				<span>{cool}</span>
-			</div>
-			<div className="inline-flex items-center gap-x-1">
-				<Button className="">
-					<Java size="18" />
-				</Button>
-				<span>{coffee}</span>
-			</div>
+			{reactionsButtons}
 		</div>
 	);
 }

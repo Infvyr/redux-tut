@@ -23,7 +23,8 @@
     "plugin:react-hooks/recommended",
     "plugin:react/jsx-runtime",
     "plugin:prettier/recommended",
-    "plugin:import/react"
+    "plugin:import/react",
+    "prettier"
   ],
   "plugins": ["react", "import", "react-hooks"],
   "settings": {
@@ -32,8 +33,14 @@
     },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx"],
-        "moduleDirectory": ["node_modules", "src"]
+        "extensions": [
+          ".js",
+          ".jsx"
+        ],
+        "moduleDirectory": [
+          "node_modules",
+          "src"
+        ]
       }
     }
   },

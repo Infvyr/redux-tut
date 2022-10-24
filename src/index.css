@@ -4,81 +4,98 @@
 
 @layer base {
 	body {
-		@apply text-gray-900 bg-gray-100 font-sans antialiased
+		@apply text-gray-900 bg-gray-100 font-sans antialiased;
 	}
 
-	h1, h2, h3, h4, h5, h6, p, div, span {
-		@apply dark:text-white
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	div,
+	span {
+		@apply dark:text-white;
 	}
 
 	h1 {
-		@apply text-xl md:text-3xl
+		@apply text-xl md:text-3xl;
 	}
 
 	h2 {
-		@apply text-lg md:text-2xl
+		@apply text-lg md:text-2xl;
 	}
 
 	h3 {
-		@apply text-[1.05rem] md:text-xl
+		@apply text-[1.05rem] md:text-xl;
 	}
 
-	input, textarea, select {
-		@apply text-gray-900
+	input,
+	textarea,
+	select {
+		@apply text-gray-900;
 	}
 
 	label {
-		@apply cursor-pointer
+		@apply cursor-pointer;
 	}
 
 	a {
-		@apply duration-300
+		@apply duration-300;
 	}
 }
 
 @layer components {
 	#root {
-		@apply block sm:grid md:grid-cols-[300px_1fr] min-h-screen
+		@apply block sm:grid md:grid-cols-[300px_1fr] min-h-screen;
 	}
 
 	.card {
-		@apply p-5 xl:p-8 bg-white rounded border border-gray-200 shadow dark:bg-slate-800 dark:border-gray-700
+		@apply p-5 xl:p-8 bg-white rounded border border-gray-200 shadow dark:bg-slate-800 dark:border-gray-700;
 	}
 
-	svg[aria-label="Folder"] {
-		@apply fill-blue-600 stroke-gray-700 dark:fill-white dark:stroke-white group-hover:stroke-white dark:group-hover:stroke-gray-300 transition-colors
+	svg[aria-label='Folder'] {
+		@apply fill-blue-600 stroke-gray-700 dark:fill-white dark:stroke-white group-hover:stroke-white dark:group-hover:stroke-gray-300 transition-colors;
 	}
 
-	svg[aria-label="Folder"] path {
-		@apply stroke-1 !fill-blue-600
+	svg[aria-label='Folder'] path {
+		@apply stroke-1 !fill-blue-600;
 	}
 
 	button,
 	button[type='button'] {
-		@apply inline-flex items-center justify-center px-4 min-h-[40px] md:min-h-[36px] rounded cursor-pointer transition-colors
+		@apply inline-flex items-center justify-center px-4 min-h-[40px] md:min-h-[36px] rounded cursor-pointer transition-colors;
 	}
 
 	.btn-primary {
-		@apply bg-blue-600 hover:bg-blue-700 text-white
+		@apply bg-blue-600 hover:bg-blue-700 text-white;
 	}
 
 	.btn-danger {
-		@apply bg-red-600 hover:bg-red-700 text-white
+		@apply bg-red-600 hover:bg-red-700 text-white;
 	}
 
 	.btn-transparent {
-		@apply bg-transparent
+		@apply bg-transparent;
 	}
 
-	input, select, textarea {
-		@apply px-2 rounded border border-gray-900
+	button[disabled] {
+		@apply bg-amber-100 text-inherit hover:bg-amber-100 cursor-not-allowed dark:text-gray-900;
 	}
 
-	input, select {
-		@apply min-h-[34px]
+	input,
+	select,
+	textarea {
+		@apply px-2 rounded border border-gray-900;
+	}
+
+	input,
+	select {
+		@apply min-h-[34px];
 	}
 
 	textarea {
-		@apply min-h-[160px] py-1
+		@apply min-h-[160px] py-1;
 	}
 }

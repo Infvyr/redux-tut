@@ -8,7 +8,7 @@ function Posts() {
 		<>
 			<PageHeader backTo={-1} />
 			<Space />
-			<div className="card h-[calc(100%-98px)]">
+			<div className="card xl:h-[calc(100%-122px)]">
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 ">
 					<PostForm />
 					<PostsListing />

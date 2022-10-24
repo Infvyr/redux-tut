@@ -9,7 +9,7 @@ function PostsListing() {
 	const posts = useSelector(selectAllPosts);
 	const orderedPosts = posts
 		.slice() // shallow copy of posts
-		.sort((a, b) => b.date.localeCompare(a.date));
+		.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 
 	return (
 		<section>
@@ -19,7 +19,7 @@ function PostsListing() {
 			<div className="flex flex-col gap-y-5 no-scrollbar overflow-auto h-[calc(100vh-210px)]">
 				{!!orderedPosts.length &&
 					orderedPosts.map(post => {
-						const { id, title, content, date, reactions } = post;
+						const { id, title, content, createdAt, authorId } = post;
 						const excerpt = content.substring(0, 100);
 
 						return (
@@ -31,10 +31,10 @@ function PostsListing() {
 								<p>{excerpt}</p>
 								<footer className="meta flex flex-col xl:flex-row xl:items-center justify-between gap-1">
 									<p>
-										<Author id={id} />
-										<TimeAgo timestamp={date} />
+										<Author authorId={authorId} />
+										<TimeAgo timestamp={createdAt} />
 									</p>
-									<Reactions reactions={reactions} />
+									<Reactions post={post} />
 								</footer>
 							</article>
 						);
