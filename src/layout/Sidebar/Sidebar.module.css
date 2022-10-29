@@ -3,7 +3,7 @@
 }
 
 .logo-wrapper {
-    @apply h-20 flex justify-center;
+	@apply h-20 flex justify-center;
 }
 
 .logo {

@@ -9,7 +9,8 @@ function PageHeader({ backTo = '/' }) {
 	const location = useLocation();
 	const [pathName, setPathName] = useState('');
 
-	const pageTitle = pathName.charAt(0).toUpperCase() + pathName.slice(1);
+	const pageTitle =
+		pathName.charAt(0).toUpperCase() + pathName.slice(1).replace('-', ' ');
 
 	const navigateBackTo = () => () => navigate(backTo);
 

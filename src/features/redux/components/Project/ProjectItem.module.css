@@ -3,7 +3,7 @@
 }
 
 .title {
-    @apply text-lg md:text-2xl text-center;
+	@apply text-lg md:text-2xl text-center;
 }
 
 .link {

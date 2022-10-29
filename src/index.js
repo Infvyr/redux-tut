@@ -11,6 +11,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 const LazyNotFoundPage = lazy(() => import('pages/Error/NotFoundPage'));
 const LazyCounter = lazy(() => import('features/counter/view/Counter'));
 const LazyPosts = lazy(() => import('features/posts/view/Posts'));
+const LazyApiPosts = lazy(() => import('features/posts/view/DynamicPosts'));
 
 const router = createBrowserRouter([
 	{
@@ -39,6 +40,14 @@ const router = createBrowserRouter([
 				element: (
 					<Suspense fallback={<p>Loading...</p>}>
 						<LazyPosts />
+					</Suspense>
+				),
+			},
+			{
+				path: 'redux/posts-api',
+				element: (
+					<Suspense fallback={<p>Loading...</p>}>
+						<LazyApiPosts />
 					</Suspense>
 				),
 			},

@@ -45,7 +45,6 @@
     }
   },
   "rules": {
-    "prettier/prettier": ["error", { "singleQuote": true }],
     "linebreak-style": ["error", "unix"],
     "semi": ["error", "always"],
     "no-trailing-spaces": "error",

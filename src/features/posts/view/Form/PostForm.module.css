@@ -3,7 +3,7 @@
 }
 
 .form {
-    @apply lg:max-w-xl;
+	@apply lg:max-w-xl;
 }
 
 .form-group {
