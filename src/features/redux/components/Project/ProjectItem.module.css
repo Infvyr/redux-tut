@@ -7,7 +7,7 @@
 }
 
 .link {
-    @apply p-5 rounded transition-colors;
+	@apply p-5 rounded transition-colors;
 }
 
 .wrapper:hover .title {

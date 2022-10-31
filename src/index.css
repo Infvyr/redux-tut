@@ -31,18 +31,36 @@
 		@apply text-[1.05rem] md:text-xl;
 	}
 
-	input,
-	textarea,
-	select {
-		@apply text-gray-900;
-	}
-
 	label {
 		@apply cursor-pointer;
 	}
 
+	input,
+	select,
+	textarea {
+		@apply px-2 rounded border border-gray-900 text-gray-900;
+	}
+
+	input,
+	select {
+		@apply min-h-[34px];
+	}
+
+	select {
+		@apply appearance-none;
+	}
+
+	textarea {
+		@apply min-h-[160px] py-1;
+	}
+
 	a {
 		@apply duration-300;
+	}
+
+	button svg[aria-label='Edit'],
+	button svg[aria-label='Trash'] {
+		@apply stroke-white;
 	}
 }
 
@@ -82,20 +100,5 @@
 
 	button[disabled] {
 		@apply bg-amber-100 text-inherit hover:bg-amber-100 cursor-not-allowed dark:text-gray-900;
-	}
-
-	input,
-	select,
-	textarea {
-		@apply px-2 rounded border border-gray-900;
-	}
-
-	input,
-	select {
-		@apply min-h-[34px];
-	}
-
-	textarea {
-		@apply min-h-[160px] py-1;
 	}
 }
