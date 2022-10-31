@@ -6,7 +6,7 @@ function ProjectItem({ url, name }) {
 	return (
 		<div className={styles.wrapper}>
 			<Link to={url} className={styles.link}>
-				<Folder size="180px" />
+				<Folder className={styles.icon} />
 				<h2 className={styles.title}>{name}</h2>
 			</Link>
 		</div>

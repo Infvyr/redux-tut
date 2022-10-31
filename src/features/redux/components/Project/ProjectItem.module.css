@@ -3,11 +3,11 @@
 }
 
 .title {
-	@apply text-lg md:text-2xl text-center;
+	@apply text-[17px] xl:text-2xl text-center;
 }
 
 .link {
-	@apply p-5 rounded transition-colors;
+    @apply lg:p-5 rounded transition-colors;
 }
 
 .wrapper:hover .title {
@@ -16,4 +16,8 @@
 
 .wrapper:hover .link {
     @apply bg-amber-100 dark:bg-slate-700;
+}
+
+.icon {
+    @apply !w-[94px] !h-[94px] lg:!w-44 lg:!h-44
 }
