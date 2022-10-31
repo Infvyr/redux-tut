@@ -65,10 +65,9 @@
 }
 
 @layer components {
-	#root {
-		@apply block sm:grid md:grid-cols-[300px_1fr] min-h-screen;
-	}
-
+	/*#root {
+          @apply block sm:grid md:grid-cols-[300px_1fr] min-h-screen;
+      }*/
 	.card {
 		@apply p-5 xl:p-8 bg-white rounded border border-gray-200 shadow dark:bg-slate-800 dark:border-gray-700;
 	}

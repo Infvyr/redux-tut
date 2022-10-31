@@ -1,9 +1,9 @@
 .wrapper {
-	@apply flex flex-col items-start gap-y-2;
+  @apply flex flex-col items-start gap-y-2;
 }
 
 .title {
-	@apply text-[17px] xl:text-2xl text-center;
+    @apply text-[17px] xl:text-2xl text-center;
 }
 
 .link {
@@ -19,5 +19,5 @@
 }
 
 .icon {
-    @apply !w-[94px] !h-[94px] lg:!w-44 lg:!h-44
+    @apply !w-[94px] !h-[94px] lg:!w-44 lg:!h-44;
 }

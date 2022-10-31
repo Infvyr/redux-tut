@@ -1,5 +1,5 @@
 .section-title {
-	@apply md:text-3xl;
+  @apply md:text-3xl;
 }
 
 .form {
@@ -11,13 +11,13 @@
 }
 
 .label {
-    @apply self-start text-lg;
+	@apply self-start text-lg;
 }
 
 .footer {
-    @apply my-5;
+	@apply my-5;
 }
 
 .submit {
-    @apply w-full;
+	@apply w-full;
 }
