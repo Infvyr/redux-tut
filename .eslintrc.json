@@ -45,7 +45,14 @@
     }
   },
   "rules": {
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
     "no-trailing-spaces": "error",
     "no-console": "off",
     "no-unused-vars": [

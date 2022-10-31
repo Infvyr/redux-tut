@@ -1,5 +1,5 @@
 .section-title {
-  @apply md:text-3xl;
+	@apply md:text-3xl;
 }
 
 .form {
