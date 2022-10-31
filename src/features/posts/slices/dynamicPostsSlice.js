@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
+import { handlePendingStatus, handleRejectedStatus } from 'app/redux/errors';
 import sub from 'date-fns/sub';
 
 const POSTS_URL = process.env.REACT_APP_POSTS;
@@ -90,10 +91,7 @@ export const postsApiSlice = createSlice({
 	extraReducers(builder) {
 		builder
 			.addCase(fetchPosts.pending, state => {
-				if (state.status === 'idle') {
-					state.status = 'loading';
-					state.error = null;
-				}
+				handlePendingStatus(state);
 			})
 			.addCase(fetchPosts.fulfilled, (state, action) => {
 				if (state.status === 'loading') {
@@ -118,8 +116,7 @@ export const postsApiSlice = createSlice({
 				}
 			})
 			.addCase(fetchPosts.rejected, (state, action) => {
-				state.status = 'failed';
-				state.error = action.payload;
+				handleRejectedStatus(state, action);
 			})
 			.addCase(addNewPost.fulfilled, (state, action) => {
 				action.payload.userId = Number(action.payload.userId);
@@ -131,7 +128,6 @@ export const postsApiSlice = createSlice({
 					coffee: 0,
 				};
 
-				console.log(action.payload);
 				state.postsApi.push(action.payload);
 			});
 	},

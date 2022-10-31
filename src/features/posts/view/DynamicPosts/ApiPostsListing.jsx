@@ -53,6 +53,7 @@ function ApiPostsListing() {
 			);
 		});
 	}
+
 	if (postsStatus === 'failed') {
 		content = <p>{postsError}</p>;
 	}

@@ -1,11 +1,19 @@
 import PageHeader from 'components/PageHeader';
 import Space from 'components/Space';
+import {
+	fetchPeople,
+	getPeopleError,
+	getPeopleStatus,
+	selectPeople,
+} from 'features/crud/slices/peopleSlice';
 import TableActions from 'features/crud/view/TableActions';
 import TableHeader from 'features/crud/view/TableHeader';
 import UsersDescription from 'features/crud/view/UsersDescription';
 import { useSearchParamsByName } from 'hooks/useSearchParamsByName';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-const people = [
+/*const people = [
 	{
 		id: 1,
 		name: 'Leanne Graham',
@@ -52,11 +60,18 @@ const people = [
 			bs: 'synergize scalable supply-chains',
 		},
 	},
-];
+];*/
 
 const tableCellClassName = 'px-3 py-3.5 whitespace-nowrap';
 
 function UsersLayout() {
+	let content = null;
+
+	const dispatch = useDispatch();
+	const people = useSelector(selectPeople);
+	const peopleStatus = useSelector(getPeopleStatus);
+	const peopleError = useSelector(getPeopleError);
+
 	let [sortProp, desc] = useSearchParamsByName('sort');
 	let sortedPeople = [...people].sort((a, b) => {
 		switch (sortProp) {
@@ -77,6 +92,45 @@ function UsersLayout() {
 		}
 	});
 
+	useEffect(() => {
+		dispatch(fetchPeople());
+	}, [dispatch]);
+
+	if (peopleStatus === 'loading') {
+		content = <p>Loading...</p>;
+	}
+
+	if (peopleStatus === 'succeeded') {
+		content = (
+			<table className="min-w-full divide-y divide-gray-300">
+				<TableHeader />
+
+				<tbody className="bg-white dark:bg-gray-600 divide-y divide-gray-200 dark:divide-gray-700">
+					{sortedPeople.map(person => (
+						<tr
+							key={person.id}
+							className="transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
+						>
+							<td className="py-3.5 pl-4 pr-3 whitespace-nowrap sm:pl-6">
+								{person.name}
+							</td>
+							<td className={tableCellClassName}>{person.address.city}</td>
+							<td className={tableCellClassName}>{person.email}</td>
+							<td className={tableCellClassName}>{person.company.name}</td>
+							<td className={tableCellClassName}>
+								<TableActions />
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		);
+	}
+
+	if (peopleStatus === 'failed') {
+		content = <p>{peopleError}</p>;
+	}
+
 	return (
 		<>
 			<PageHeader backTo="/redux" />
@@ -88,32 +142,7 @@ function UsersLayout() {
 					<div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
 						<div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
 							<div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded">
-								<table className="min-w-full divide-y divide-gray-300">
-									<TableHeader />
-
-									<tbody className="bg-white dark:bg-gray-600 divide-y divide-gray-200 dark:divide-gray-700">
-										{sortedPeople.map(person => (
-											<tr
-												key={person.id}
-												className="transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
-											>
-												<td className="py-3.5 pl-4 pr-3 whitespace-nowrap sm:pl-6">
-													{person.name}
-												</td>
-												<td className={tableCellClassName}>
-													{person.address.city}
-												</td>
-												<td className={tableCellClassName}>{person.email}</td>
-												<td className={tableCellClassName}>
-													{person.company.name}
-												</td>
-												<td className={tableCellClassName}>
-													<TableActions />
-												</td>
-											</tr>
-										))}
-									</tbody>
-								</table>
+								{content}
 							</div>
 						</div>
 					</div>
