@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './PageHeader.module.css';
 
-function PageHeader({ backTo = '/' }) {
+function PageHeader({ backTo = '/', title = '' }) {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [pathName, setPathName] = useState('');
@@ -33,14 +33,16 @@ function PageHeader({ backTo = '/' }) {
 	return (
 		<section className="card">
 			<div className={styles.wrapper}>
-				<Button
-					className={`btn-primary ${styles.button}`}
-					onClick={navigateBackTo('/')}
-				>
-					<FormPrevious color="white" size="21px" />
-					Back
-				</Button>
-				<h1 className={styles.title}>{pageTitle}</h1>
+				{backTo && (
+					<Button
+						className={`btn-primary ${styles.button}`}
+						onClick={navigateBackTo('/')}
+					>
+						<FormPrevious color="white" size="21px" />
+						Back
+					</Button>
+				)}
+				<h1 className={styles.title}>{pageTitle || title}</h1>
 			</div>
 		</section>
 	);

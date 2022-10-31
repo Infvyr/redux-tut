@@ -1,9 +1,16 @@
+import PageHeader from 'components/PageHeader';
+import Space from 'components/Space';
+
 function Dash() {
 	return (
-		<section className="">
-			<h1 className="text-3xl">Dash page</h1>
-			<p>A stats maybe</p>
-		</section>
+		<>
+			<PageHeader backTo={false} title="Dashboard" />
+			<Space twHeight="h-10" />
+
+			<div className="card h-screen">
+				<p>A stats maybe</p>
+			</div>
+		</>
 	);
 }
 
