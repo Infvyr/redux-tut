@@ -1,15 +1,17 @@
 import { Descending } from 'grommet-icons';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParamsByName } from 'hooks/useSearchParamsByName';
+import { Link, useLocation } from 'react-router-dom';
 
 function SortableColumn({ prop, children }) {
 	let { pathname } = useLocation();
-	let [searchParams] = useSearchParams();
-	let [sortProp, desc] = searchParams.get('sort')?.split(':') ?? [];
+	let [sortProp, desc] = useSearchParamsByName('sort');
 	let newSort = null;
 
 	if (sortProp !== prop) {
 		newSort = prop;
-	} else if (sortProp === prop && !desc) {
+	}
+
+	if (sortProp === prop && !desc) {
 		newSort = `${prop}:desc`;
 	}
 

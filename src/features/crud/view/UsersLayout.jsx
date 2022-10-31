@@ -3,7 +3,7 @@ import Space from 'components/Space';
 import TableActions from 'features/crud/view/TableActions';
 import TableHeader from 'features/crud/view/TableHeader';
 import UsersDescription from 'features/crud/view/UsersDescription';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParamsByName } from 'hooks/useSearchParamsByName';
 
 const people = [
 	{
@@ -57,24 +57,24 @@ const people = [
 const tableCellClassName = 'px-3 py-3.5 whitespace-nowrap';
 
 function UsersLayout() {
-	let [searchParams] = useSearchParams();
-	let [sortProp, desc] = searchParams.get('sort')?.split(':') ?? [];
+	let [sortProp, desc] = useSearchParamsByName('sort');
 	let sortedPeople = [...people].sort((a, b) => {
-		if (sortProp === 'address') {
-			return desc
-				? b[sortProp]?.city?.localeCompare(a[sortProp]?.city)
-				: a[sortProp]?.city?.localeCompare(b[sortProp]?.city);
-		}
+		switch (sortProp) {
+			case 'address':
+				return desc
+					? b[sortProp]?.city?.localeCompare(a[sortProp]?.city)
+					: a[sortProp]?.city?.localeCompare(b[sortProp]?.city);
 
-		if (sortProp === 'company') {
-			return desc
-				? b[sortProp]?.name?.localeCompare(a[sortProp]?.name)
-				: a[sortProp]?.name?.localeCompare(b[sortProp]?.name);
-		}
+			case 'company':
+				return desc
+					? b[sortProp]?.name?.localeCompare(a[sortProp]?.name)
+					: a[sortProp]?.name?.localeCompare(b[sortProp]?.name);
 
-		return desc
-			? b[sortProp]?.localeCompare(a[sortProp])
-			: a[sortProp]?.localeCompare(b[sortProp]);
+			default:
+				return desc
+					? b[sortProp]?.localeCompare(a[sortProp])
+					: a[sortProp]?.localeCompare(b[sortProp]);
+		}
 	});
 
 	return (
