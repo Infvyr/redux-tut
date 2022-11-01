@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 import { handlePendingStatus, handleRejectedStatus } from 'app/redux/errors';
 
 const USERS_URL = process.env.REACT_APP_USERS;
@@ -28,6 +28,29 @@ export const fetchPeople = createAsyncThunk(
 	}
 );
 
+export const addNewPerson = createAsyncThunk(
+	'people/addNewPerson',
+	async (initialPerson, { rejectWithValue }) => {
+		try {
+			const response = await fetch(USERS_URL, {
+				method: 'POST',
+				body: JSON.stringify(initialPerson),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+			});
+
+			if (!response.ok) {
+				throw new Error('Server error!');
+			}
+
+			return await response.json();
+		} catch (e) {
+			return rejectWithValue(e.message);
+		}
+	}
+);
+
 export const peopleSlice = createSlice({
 	name: 'people',
 	initialState,
@@ -35,6 +58,17 @@ export const peopleSlice = createSlice({
 		addPeople: {
 			reducer(state, action) {
 				state.people.push(action.payload);
+			},
+			prepare(name, city, email, companyName) {
+				return {
+					payload: {
+						id: nanoid(3),
+						name,
+						address: { city },
+						email,
+						company: { name: companyName },
+					},
+				};
 			},
 		},
 	},
@@ -51,6 +85,10 @@ export const peopleSlice = createSlice({
 					state.status = 'succeeded';
 					state.people = state.people.concat(action.payload);
 				}
+			})
+			.addCase(addNewPerson.fulfilled, (state, action) => {
+				console.log('addNewPeople.fulfilled --> ', action);
+				state.people.push(action.payload);
 			});
 	},
 });
