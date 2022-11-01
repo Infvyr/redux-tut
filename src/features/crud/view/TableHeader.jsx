@@ -5,7 +5,7 @@ function TableHeader() {
 		<thead className="h-12 bg-gray-50 dark:bg-gray-700">
 			<tr className="font-bold text-lg">
 				<SortableColumn prop="name">Name</SortableColumn>
-				<SortableColumn prop="address">Address</SortableColumn>
+				<SortableColumn prop="address">City</SortableColumn>
 				<SortableColumn prop="email">Email</SortableColumn>
 				<SortableColumn prop="company">Company</SortableColumn>
 				<td className="px-3">Action</td>
