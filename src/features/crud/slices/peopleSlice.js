@@ -2,6 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { handlePendingStatus, handleRejectedStatus } from 'app/redux/errors';
 
 const USERS_URL = process.env.REACT_APP_USERS;
+const headers = {
+	'Content-type': 'application/json; charset=UTF-8',
+};
 
 const initialState = {
 	people: [],
@@ -13,7 +16,7 @@ export const fetchPeople = createAsyncThunk(
 	'people/fetchPeople',
 	async (_, { rejectWithValue }) => {
 		try {
-			const response = await fetch(`${USERS_URL}?_delay=4000`);
+			const response = await fetch(USERS_URL); // ?_delay=4000
 
 			if (!response.ok) {
 				throw new Error('Server error!');
@@ -32,12 +35,37 @@ export const addNewPerson = createAsyncThunk(
 	'people/addNewPerson',
 	async (initialPerson, { rejectWithValue }) => {
 		try {
-			const response = await fetch(`${USERS_URL}?_delay=6000`, {
+			const response = await fetch(USERS_URL, {
 				method: 'POST',
 				body: JSON.stringify(initialPerson),
-				headers: {
-					'Content-type': 'application/json; charset=UTF-8',
-				},
+				headers,
+			});
+
+			if (!response.ok) {
+				throw new Error('Server error!');
+			}
+
+			return await response.json();
+		} catch (e) {
+			return rejectWithValue(e.message);
+		}
+	}
+);
+
+export const updatePerson = createAsyncThunk(
+	'people/updatePerson',
+	async (initialPerson, { rejectWithValue }) => {
+		try {
+			console.log(initialPerson);
+			const response = await fetch(`${USERS_URL}/${initialPerson.id}`, {
+				method: 'PUT',
+				body: JSON.stringify({
+					name: initialPerson.name,
+					email: initialPerson.email,
+					address: { city: initialPerson.city },
+					company: { name: initialPerson.companyName },
+				}),
+				headers,
 			});
 
 			if (!response.ok) {
@@ -71,8 +99,17 @@ export const peopleSlice = createSlice({
 				}
 			})
 			.addCase(addNewPerson.fulfilled, (state, action) => {
-				state.status = 'succeeded';
 				state.people.unshift(action.payload);
+			})
+			.addCase(updatePerson.fulfilled, (state, action) => {
+				const { id, city, companyName, email, name } = action.payload;
+				const existingPost = state.people.find(person => person.id === id);
+				if (existingPost) {
+					existingPost.name = name;
+					existingPost.city = city;
+					existingPost.email = email;
+					existingPost.companyName = companyName;
+				}
 			});
 	},
 });

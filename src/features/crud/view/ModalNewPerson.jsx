@@ -1,16 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react';
 import Button from 'components/Button';
+import { initialFormState } from 'features/crud/context/Crud.context';
 import { addNewPerson } from 'features/crud/slices/peopleSlice';
 import { Fragment, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ReactComponent as Spinner } from 'assets/images/spinner.svg';
-
-const initialFormState = {
-	name: undefined,
-	city: undefined,
-	email: undefined,
-	companyName: undefined,
-};
 
 const initialAddRequestStatus = 'idle';
 

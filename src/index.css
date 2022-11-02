@@ -60,7 +60,8 @@
 
 	button svg[aria-label='Save'],
 	button svg[aria-label='Edit'],
-	button svg[aria-label='Trash'] {
+	button svg[aria-label='Trash'],
+	button svg[aria-label='FormClose'] {
 		@apply stroke-white;
 	}
 }

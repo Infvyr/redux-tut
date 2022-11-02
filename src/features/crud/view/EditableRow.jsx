@@ -1,9 +1,47 @@
+import { selectPeople, updatePerson } from 'features/crud/slices/peopleSlice';
 import TableActions from 'features/crud/view/TableActions';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const tableCellClassName = 'px-3 py-[0.6875rem] whitespace-nowrap';
 
-function EditableRow({ editFormData, onEdit }) {
-	const { name, city, email, companyName } = editFormData;
+function EditableRow({ personId, setPersonId }) {
+	const dispatch = useDispatch();
+	const people = useSelector(selectPeople);
+	const existingPerson = people.slice().find(person => person.id === personId);
+
+	const [editData, setEditData] = useState({
+		name: existingPerson.name,
+		email: existingPerson.email,
+		city: existingPerson.address.city,
+		companyName: existingPerson.company.name,
+	});
+
+	const onEditName = e => setEditData({ ...editData, name: e.target.value });
+	const onEditCity = e => setEditData({ ...editData, city: e.target.value });
+	const onEditEmail = e => setEditData({ ...editData, email: e.target.value });
+	const onEditCompanyName = e =>
+		setEditData({ ...editData, companyName: e.target.value });
+
+	const cancelEditRow = () => setPersonId(null);
+
+	const handleEditRow = () => {
+		try {
+			dispatch(
+				updatePerson({
+					id: personId,
+					name: editData.name,
+					city: editData.city,
+					email: editData.email,
+					companyName: editData.companyName,
+				})
+			);
+
+			cancelEditRow();
+		} catch (e) {
+			console.error('Failed to update person', e);
+		}
+	};
 
 	return (
 		<tr className="editable-row">
@@ -13,8 +51,8 @@ function EditableRow({ editFormData, onEdit }) {
 					name="name"
 					placeholder="Enter a name..."
 					className="w-full"
-					value={name}
-					onChange={onEdit}
+					value={editData.name}
+					onChange={onEditName}
 					required
 				/>
 			</td>
@@ -24,8 +62,8 @@ function EditableRow({ editFormData, onEdit }) {
 					name="city"
 					placeholder="Enter a city..."
 					className="w-full"
-					value={city}
-					onChange={onEdit}
+					value={editData.city}
+					onChange={onEditCity}
 					required
 				/>
 			</td>
@@ -35,24 +73,28 @@ function EditableRow({ editFormData, onEdit }) {
 					name="email"
 					placeholder="Enter an email..."
 					className="w-full"
-					value={email}
-					onChange={onEdit}
+					value={editData.email}
+					onChange={onEditEmail}
 					required
 				/>
 			</td>
 			<td className={tableCellClassName}>
 				<input
 					type="text"
-					name="company"
+					name="companyName"
 					placeholder="Enter a company..."
 					className="w-full"
-					value={companyName}
-					onChange={onEdit}
+					value={editData.companyName}
+					onChange={onEditCompanyName}
 					required
 				/>
 			</td>
 			<td className={tableCellClassName}>
-				<TableActions isEditable />
+				<TableActions
+					onEditRow={handleEditRow}
+					cancelEditRow={cancelEditRow}
+					isEditable
+				/>
 			</td>
 		</tr>
 	);

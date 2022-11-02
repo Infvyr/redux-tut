@@ -3,21 +3,21 @@
 }
 
 .title {
-    @apply text-[17px] xl:text-2xl text-center;
+	@apply text-[17px] xl:text-2xl text-center;
 }
 
 .link {
-    @apply lg:p-5 rounded transition-colors;
+	@apply lg:p-5 rounded transition-colors;
 }
 
 .wrapper:hover .title {
-    @apply dark:text-gray-300;
+	@apply dark:text-gray-300;
 }
 
 .wrapper:hover .link {
-    @apply bg-amber-100 dark:bg-slate-700;
+	@apply bg-amber-100 dark:bg-slate-700;
 }
 
 .icon {
-    @apply !w-[94px] !h-[94px] lg:!w-44 lg:!h-44;
+	@apply !w-[94px] !h-[94px] lg:!w-44 lg:!h-44;
 }

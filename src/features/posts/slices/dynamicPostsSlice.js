@@ -137,6 +137,6 @@ export const selectAllApiPosts = state => state.postsApi.postsApi;
 export const getPostsStatus = state => state.postsApi.status;
 export const getPostsError = state => state.postsApi.error;
 
-export const { postAdded, reactionAdded } = postsApiSlice.actions;
+export const { reactionAdded } = postsApiSlice.actions;
 
 export default postsApiSlice.reducer;

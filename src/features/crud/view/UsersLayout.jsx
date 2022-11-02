@@ -1,51 +1,29 @@
 import PageHeader from 'components/PageHeader';
 import Space from 'components/Space';
-import { initialFormState } from 'features/crud/context/Crud.context';
 import {
 	fetchPeople,
 	getPeopleError,
 	getPeopleStatus,
-	selectPeople,
 } from 'features/crud/slices/peopleSlice';
 import TableBody from 'features/crud/view/TableBody';
 import TableHeader from 'features/crud/view/TableHeader';
 import TablePanel from 'features/crud/view/TablePanel';
 import UsersDescription from 'features/crud/view/UsersDescription';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function UsersLayout() {
 	let content = null;
 
 	const dispatch = useDispatch();
-	const people = useSelector(selectPeople);
 	const peopleStatus = useSelector(getPeopleStatus);
 	const peopleError = useSelector(getPeopleError);
 
-	const [personId, setPersonId] = useState(null);
-	const [editFormData, setEditFormData] = useState(initialFormState);
-
-	const handleEditFormSubmit = e => {
-		e.preventDefault();
-
-		const editedRowData = {
-			id: personId,
-			name: editFormData.name,
-			city: editFormData.city,
-			email: editFormData.email,
-			companyName: editFormData.companyName,
-		};
-
-		const newData = [...people];
-
-		const index = newData.findIndex(p => p.id === personId);
-		newData[index] = editedRowData;
-		setPersonId(null);
-	};
-
 	useEffect(() => {
-		dispatch(fetchPeople());
-	}, [dispatch]);
+		if (peopleStatus === 'idle') {
+			dispatch(fetchPeople());
+		}
+	}, [dispatch, peopleStatus]);
 
 	if (peopleStatus === 'loading') {
 		content = <p>Loading...</p>;
@@ -53,17 +31,10 @@ function UsersLayout() {
 
 	if (peopleStatus === 'succeeded') {
 		content = (
-			<form onSubmit={handleEditFormSubmit}>
-				<table className="min-w-full divide-y divide-gray-300">
-					<TableHeader />
-					<TableBody
-						setEditFormData={setEditFormData}
-						setPersonId={setPersonId}
-						editFormData={editFormData}
-						personId={personId}
-					/>
-				</table>
-			</form>
+			<table className="min-w-full divide-y divide-gray-300">
+				<TableHeader />
+				<TableBody />
+			</table>
 		);
 	}
 
