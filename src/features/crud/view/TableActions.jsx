@@ -1,7 +1,7 @@
 import Button from 'components/Button';
 import { Edit, Save, Trash } from 'grommet-icons';
 
-function TableActions({ person, onEdit, isEditable, onSubmit }) {
+function TableActions({ person, onEdit, isEditable }) {
 	return (
 		<div className="flex gap-3 items-center">
 			{isEditable ? (
