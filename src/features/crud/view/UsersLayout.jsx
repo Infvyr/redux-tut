@@ -9,7 +9,7 @@ import TableBody from 'features/crud/view/TableBody';
 import TableHeader from 'features/crud/view/TableHeader';
 import TablePanel from 'features/crud/view/TablePanel';
 import UsersDescription from 'features/crud/view/UsersDescription';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function UsersLayout() {
@@ -18,8 +18,11 @@ function UsersLayout() {
 	const dispatch = useDispatch();
 	const peopleStatus = useSelector(getPeopleStatus);
 	const peopleError = useSelector(getPeopleError);
+	const runRef = useRef(false);
 
 	useEffect(() => {
+		if (runRef.current) return;
+		runRef.current = true;
 		if (peopleStatus === 'idle') {
 			dispatch(fetchPeople());
 		}

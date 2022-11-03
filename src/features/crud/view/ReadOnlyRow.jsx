@@ -6,11 +6,12 @@ function ReadOnlyRow({ person, onEdit }) {
 	return (
 		<tr className="transition-colors hover:bg-gray-50 dark:hover:bg-gray-700">
 			<td className="py-3.5 pl-4 pr-3 whitespace-nowrap sm:pl-6">
-				{person.name}
+				{person?.firstName}
 			</td>
-			<td className={tableCellClassName}>{person.address.city}</td>
-			<td className={tableCellClassName}>{person.email}</td>
-			<td className={tableCellClassName}>{person.company.name}</td>
+			<td className={tableCellClassName}>{person?.lastName}</td>
+			<td className={tableCellClassName}>{person?.birthDate}</td>
+			<td className={tableCellClassName}>{person?.email}</td>
+			<td className={tableCellClassName}>{person?.address?.address}</td>
 			<td className={tableCellClassName}>
 				<TableActions person={person} onEdit={onEdit} />
 			</td>

@@ -4,10 +4,11 @@ function TableHeader() {
 	return (
 		<thead className="h-12 bg-gray-50 dark:bg-gray-700">
 			<tr className="font-bold text-lg">
-				<SortableColumn prop="name">Name</SortableColumn>
-				<SortableColumn prop="address">City</SortableColumn>
+				<SortableColumn prop="firstName">First Name</SortableColumn>
+				<SortableColumn prop="lastName">Last Name</SortableColumn>
+				<SortableColumn prop="birthDate">Birthday</SortableColumn>
 				<SortableColumn prop="email">Email</SortableColumn>
-				<SortableColumn prop="company">Company</SortableColumn>
+				<SortableColumn prop="address">Address</SortableColumn>
 				<td className="px-3">Action</td>
 			</tr>
 		</thead>

@@ -1,4 +1,8 @@
-import { selectPeople, updatePerson } from 'features/crud/slices/peopleSlice';
+import {
+	selectPeople,
+	updatePeople,
+	updatePerson,
+} from 'features/crud/slices/peopleSlice';
 import TableActions from 'features/crud/view/TableActions';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,17 +15,22 @@ function EditableRow({ personId, setPersonId }) {
 	const existingPerson = people.slice().find(person => person.id === personId);
 
 	const [editData, setEditData] = useState({
-		name: existingPerson.name,
+		firstName: existingPerson.firstName,
+		lastName: existingPerson.lastName,
+		birthDate: existingPerson.birthDate,
 		email: existingPerson.email,
-		city: existingPerson.address.city,
-		companyName: existingPerson.company.name,
+		address: existingPerson.address.address,
 	});
 
-	const onEditName = e => setEditData({ ...editData, name: e.target.value });
-	const onEditCity = e => setEditData({ ...editData, city: e.target.value });
+	const onEditFirstName = e =>
+		setEditData({ ...editData, firstName: e.target.value });
+	const onEditLastName = e =>
+		setEditData({ ...editData, lastName: e.target.value });
+	const onEditBDay = e =>
+		setEditData({ ...editData, birthDate: e.target.value });
 	const onEditEmail = e => setEditData({ ...editData, email: e.target.value });
-	const onEditCompanyName = e =>
-		setEditData({ ...editData, companyName: e.target.value });
+	const onEditAddress = e =>
+		setEditData({ ...editData, address: e.target.value });
 
 	const cancelEditRow = () => setPersonId(null);
 
@@ -30,12 +39,14 @@ function EditableRow({ personId, setPersonId }) {
 			dispatch(
 				updatePerson({
 					id: personId,
-					name: editData.name,
-					city: editData.city,
+					firstName: editData.firstName,
+					lastName: editData.lastName,
+					birthDate: editData.birthDate,
 					email: editData.email,
-					companyName: editData.companyName,
+					address: editData.address,
 				})
 			);
+			dispatch(updatePeople());
 
 			cancelEditRow();
 		} catch (e) {
@@ -48,30 +59,41 @@ function EditableRow({ personId, setPersonId }) {
 			<td className="py-[0.6875rem] pl-4 pr-3 whitespace-nowrap sm:pl-6">
 				<input
 					type="text"
-					name="name"
-					placeholder="Enter a name..."
+					name="firstName"
+					placeholder="Enter first name..."
 					className="w-full"
-					value={editData.name}
-					onChange={onEditName}
+					value={editData.firstName}
+					onChange={onEditFirstName}
 					required
 				/>
 			</td>
 			<td className={tableCellClassName}>
 				<input
 					type="text"
-					name="city"
-					placeholder="Enter a city..."
+					name="lastName"
+					placeholder="Enter last name..."
 					className="w-full"
-					value={editData.city}
-					onChange={onEditCity}
+					value={editData.lastName}
+					onChange={onEditLastName}
 					required
 				/>
 			</td>
 			<td className={tableCellClassName}>
 				<input
-					type="text"
+					type="date"
+					name="bdate"
+					placeholder="Enter birthdate..."
+					className="w-full"
+					value={editData.birthDate}
+					onChange={onEditBDay}
+					required
+				/>
+			</td>
+			<td className={tableCellClassName}>
+				<input
+					type="email"
 					name="email"
-					placeholder="Enter an email..."
+					placeholder="Enter email..."
 					className="w-full"
 					value={editData.email}
 					onChange={onEditEmail}
@@ -81,11 +103,11 @@ function EditableRow({ personId, setPersonId }) {
 			<td className={tableCellClassName}>
 				<input
 					type="text"
-					name="companyName"
-					placeholder="Enter a company..."
+					name="address"
+					placeholder="Enter address..."
 					className="w-full"
-					value={editData.companyName}
-					onChange={onEditCompanyName}
+					value={editData.address}
+					onChange={onEditAddress}
 					required
 				/>
 			</td>

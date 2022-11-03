@@ -1,6 +1,7 @@
 export const initialFormState = {
-	name: '',
-	city: '',
+	firstName: '',
+	lastName: '',
+	birthDate: '',
 	email: '',
-	companyName: '',
+	address: '',
 };

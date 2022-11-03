@@ -16,18 +16,31 @@ function ModalNewPerson({ isOpen, closeModal }) {
 		initialAddRequestStatus
 	);
 
-	const onNameChanged = e => setForm({ ...form, name: e.target.value });
-	const onCityChanged = e => setForm({ ...form, city: e.target.value });
+	const onFirstNameChanged = e =>
+		setForm({ ...form, firstName: e.target.value });
+	const onLastNameChanged = e => setForm({ ...form, lastName: e.target.value });
+	const onBDayChanged = e => setForm({ ...form, birthDate: e.target.value });
 	const onEmailChanged = e => setForm({ ...form, email: e.target.value });
-	const onCompanyNameChanged = e =>
-		setForm({ ...form, companyName: e.target.value });
+	const onAddressChanged = e => setForm({ ...form, address: e.target.value });
 
 	const canSave = useMemo(() => {
 		return (
-			[form.companyName, form.email, form.city, form.name].every(Boolean) &&
-			addRequestStatus === 'idle'
+			[
+				form.firstName,
+				form.lastName,
+				form.email,
+				form.birthDate,
+				form.address,
+			].every(Boolean) && addRequestStatus === 'idle'
 		);
-	}, [addRequestStatus, form.city, form.companyName, form.email, form.name]);
+	}, [
+		addRequestStatus,
+		form.address,
+		form.birthDate,
+		form.email,
+		form.firstName,
+		form.lastName,
+	]);
 
 	const onAddNewPerson = e => {
 		e.preventDefault();
@@ -38,10 +51,11 @@ function ModalNewPerson({ isOpen, closeModal }) {
 
 				dispatch(
 					addNewPerson({
-						name: form.name?.trim(),
-						address: { city: form.city?.trim() },
+						firstName: form.firstName?.trim(),
+						lastName: form.lastName?.trim(),
+						birthDate: form.birthDate?.trim(),
 						email: form.email?.trim(),
-						company: { name: form.companyName?.trim() },
+						address: { address: form.address?.trim() },
 					})
 				).unwrap();
 
@@ -90,13 +104,13 @@ function ModalNewPerson({ isOpen, closeModal }) {
 									<p className="mt-2 text-sm">
 										This will add a new person to&nbsp;
 										<a
-											href="https://jsonplaceholder.typicode.com"
+											href="https://dummyjson.com/docs/users"
 											title="Open source API"
 											rel="noopener, nofollow noreferrer"
 											className="underline-offset-4 underline"
 											target="_blank"
 										>
-											Jsonplaceholder users api
+											dummyjson users api
 										</a>
 									</p>
 								</Dialog.Title>
@@ -105,31 +119,46 @@ function ModalNewPerson({ isOpen, closeModal }) {
 									<form onSubmit={onAddNewPerson}>
 										<div className="grid grid-cols-1 gap-5 mt-4 sm:grid-cols-2">
 											<div>
-												<label htmlFor="name">Name</label>
+												<label htmlFor="firstName">
+													First Name{' '}
+													<span title="Required" className="text-red-600">
+														*
+													</span>
+												</label>
 												<input
-													id="name"
+													id="firstName"
 													type="text"
 													className="mt-2 w-full"
-													value={form.name || ''}
-													onChange={onNameChanged}
+													value={form.firstName || ''}
+													onChange={onFirstNameChanged}
 													required
 												/>
 											</div>
 
 											<div>
-												<label htmlFor="city">City</label>
+												<label htmlFor="lastName">
+													Last Name{' '}
+													<span title="Required" className="text-red-600">
+														*
+													</span>
+												</label>
 												<input
-													id="city"
+													id="lastName"
 													type="text"
 													className="mt-2 w-full"
-													value={form.city || ''}
-													onChange={onCityChanged}
+													value={form.lastName || ''}
+													onChange={onLastNameChanged}
 													required
 												/>
 											</div>
 
 											<div>
-												<label htmlFor="email">Email</label>
+												<label htmlFor="email">
+													Email{' '}
+													<span title="Required" className="text-red-600">
+														*
+													</span>
+												</label>
 												<input
 													id="email"
 													type="email"
@@ -141,13 +170,35 @@ function ModalNewPerson({ isOpen, closeModal }) {
 											</div>
 
 											<div>
-												<label htmlFor="company-name">Company Name</label>
+												<label htmlFor="bDate">
+													Birthdate{' '}
+													<span title="Required" className="text-red-600">
+														*
+													</span>
+												</label>
 												<input
-													id="company-name"
+													id="bDate"
+													type="date"
+													className="mt-2 w-full"
+													value={form.birthDate || ''}
+													onChange={onBDayChanged}
+													required
+												/>
+											</div>
+
+											<div className="col-span-2">
+												<label htmlFor="address">
+													Address{' '}
+													<span title="Required" className="text-red-600">
+														*
+													</span>
+												</label>
+												<input
+													id="address"
 													type="text"
 													className="mt-2 w-full"
-													value={form.companyName || ''}
-													onChange={onCompanyNameChanged}
+													value={form.address || ''}
+													onChange={onAddressChanged}
 													required
 												/>
 											</div>

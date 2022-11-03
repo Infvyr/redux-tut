@@ -8,15 +8,15 @@ function useSortPeople() {
 
 	return [...people].sort((a, b) => {
 		switch (sortProp) {
+			case 'birthDate':
+				return desc
+					? new Date(b[sortProp]) - new Date(a[sortProp])
+					: new Date(a[sortProp]) - new Date(b[sortProp]);
+
 			case 'address':
 				return desc
-					? b[sortProp]?.city?.localeCompare(a[sortProp]?.city)
-					: a[sortProp]?.city?.localeCompare(b[sortProp]?.city);
-
-			case 'company':
-				return desc
-					? b[sortProp]?.name?.localeCompare(a[sortProp]?.name)
-					: a[sortProp]?.name?.localeCompare(b[sortProp]?.name);
+					? b[sortProp]?.address.localeCompare(a[sortProp]?.address)
+					: a[sortProp]?.address.localeCompare(b[sortProp]?.address);
 
 			default:
 				return desc

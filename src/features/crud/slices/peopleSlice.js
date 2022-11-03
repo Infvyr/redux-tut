@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { handlePendingStatus, handleRejectedStatus } from 'app/redux/errors';
 
-const USERS_URL = process.env.REACT_APP_USERS;
+// const USERS_URL = process.env.REACT_APP_USERS;
+const USERS_URL = process.env.REACT_APP_DUMMY_USERS;
 const headers = {
-	'Content-type': 'application/json; charset=UTF-8',
+	'Content-Type': 'application/json',
 };
 
 const initialState = {
@@ -16,15 +17,13 @@ export const fetchPeople = createAsyncThunk(
 	'people/fetchPeople',
 	async (_, { rejectWithValue }) => {
 		try {
-			const response = await fetch(USERS_URL); // ?_delay=4000
+			const response = await fetch(`${USERS_URL}?limit=10`);
 
 			if (!response.ok) {
 				throw new Error('Server error!');
 			}
 
-			const data = await response.json();
-
-			return data;
+			return await response.json();
 		} catch (e) {
 			return rejectWithValue(e.message);
 		}
@@ -35,7 +34,7 @@ export const addNewPerson = createAsyncThunk(
 	'people/addNewPerson',
 	async (initialPerson, { rejectWithValue }) => {
 		try {
-			const response = await fetch(USERS_URL, {
+			const response = await fetch(`${USERS_URL}/add`, {
 				method: 'POST',
 				body: JSON.stringify(initialPerson),
 				headers,
@@ -60,10 +59,11 @@ export const updatePerson = createAsyncThunk(
 			const response = await fetch(`${USERS_URL}/${initialPerson.id}`, {
 				method: 'PUT',
 				body: JSON.stringify({
-					name: initialPerson.name,
+					firstName: initialPerson.firstName,
+					lastName: initialPerson.lastName,
+					birthDate: initialPerson.birthDate,
 					email: initialPerson.email,
-					address: { city: initialPerson.city },
-					company: { name: initialPerson.companyName },
+					address: { address: initialPerson.address },
 				}),
 				headers,
 			});
@@ -82,7 +82,11 @@ export const updatePerson = createAsyncThunk(
 export const peopleSlice = createSlice({
 	name: 'people',
 	initialState,
-	reducers: {},
+	reducers: {
+		updatePeople: (state, action) => {
+			console.log('Actions = ', action);
+		},
+	},
 	extraReducers(builder) {
 		builder
 			.addCase(fetchPeople.pending, state => {
@@ -94,7 +98,7 @@ export const peopleSlice = createSlice({
 			.addCase(fetchPeople.fulfilled, (state, action) => {
 				if (state.status === 'loading') {
 					state.status = 'succeeded';
-					let sortedPeople = action.payload.sort((a, b) => b.id - a.id);
+					let sortedPeople = action.payload.users.sort((a, b) => b.id - a.id);
 					state.people = state.people.concat(sortedPeople);
 				}
 			})
@@ -102,13 +106,15 @@ export const peopleSlice = createSlice({
 				state.people.unshift(action.payload);
 			})
 			.addCase(updatePerson.fulfilled, (state, action) => {
-				const { id, city, companyName, email, name } = action.payload;
+				const { id, firstName, lastName, birthDate, email, address } =
+					action.payload;
 				const existingPost = state.people.find(person => person.id === id);
 				if (existingPost) {
-					existingPost.name = name;
-					existingPost.city = city;
+					existingPost.firstName = firstName;
+					existingPost.lastName = lastName;
+					existingPost.birthDate = birthDate;
 					existingPost.email = email;
-					existingPost.companyName = companyName;
+					existingPost.address = address;
 				}
 			});
 	},
@@ -117,5 +123,7 @@ export const peopleSlice = createSlice({
 export const selectPeople = state => state.people.people;
 export const getPeopleStatus = state => state.people.status;
 export const getPeopleError = state => state.people.error;
+
+export const { updatePeople } = peopleSlice.actions;
 
 export default peopleSlice.reducer;
