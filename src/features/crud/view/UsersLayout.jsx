@@ -1,10 +1,10 @@
 import PageHeader from 'components/PageHeader';
 import Space from 'components/Space';
 import {
-	fetchPeople,
 	getPeopleError,
 	getPeopleStatus,
 } from 'features/crud/slices/peopleSlice';
+import { fetchPeople } from 'features/crud/thunks/load';
 import TableBody from 'features/crud/view/TableBody';
 import TableHeader from 'features/crud/view/TableHeader';
 import TablePanel from 'features/crud/view/TablePanel';
@@ -28,7 +28,7 @@ function UsersLayout() {
 		}
 	}, [dispatch, peopleStatus]);
 
-	if (peopleStatus === 'loading') {
+	if (peopleStatus === 'pending') {
 		content = <p>Loading...</p>;
 	}
 

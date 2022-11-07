@@ -1,12 +1,17 @@
 const handleRejectedStatus = (state, action) => {
-	state.status = 'failed';
-	state.error = action.payload;
+	const { requestId } = action.meta;
+	if (state.status === 'pending' && state.currentRequestId === requestId) {
+		state.status = 'failed';
+		state.error = action.payload;
+		state.currentRequestId = undefined;
+	}
 };
 
-const handlePendingStatus = state => {
+const handlePendingStatus = (state, action) => {
 	if (state.status === 'idle') {
-		state.status = 'loading';
-		state.error = null;
+		state.status = 'pending';
+		state.currentRequestId = action.meta.requestId;
+		state.error = action.payload;
 	}
 };
 

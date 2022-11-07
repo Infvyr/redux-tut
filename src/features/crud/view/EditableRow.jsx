@@ -1,8 +1,5 @@
-import {
-	selectPeople,
-	updatePerson,
-	updatePersonState,
-} from 'features/crud/slices/peopleSlice';
+import { selectPeople } from 'features/crud/slices/peopleSlice';
+import { updatePerson } from 'features/crud/thunks';
 import TableActions from 'features/crud/view/TableActions';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,7 +37,7 @@ function EditableRow({ personId, setPersonId }) {
 
 	const cancelEditRow = () => setPersonId(null);
 
-	const handleEditRow = () => {
+	const handleEditRow = async () => {
 		try {
 			const newPersonData = {
 				id: personId,
@@ -51,11 +48,12 @@ function EditableRow({ personId, setPersonId }) {
 				address: { address: editData.address },
 			};
 
-			dispatch(updatePerson(newPersonData));
-			dispatch(updatePersonState(newPersonData));
-
-			cancelEditRow();
+			await dispatch(updatePerson(newPersonData)).unwrap();
+			await cancelEditRow();
+			// toast success
 		} catch (e) {
+			// toast error
+			await cancelEditRow();
 			console.error('Failed to update person', e);
 		}
 	};

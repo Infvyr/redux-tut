@@ -99,4 +99,8 @@
 	button[disabled] {
 		@apply bg-amber-100 text-inherit hover:bg-amber-100 cursor-not-allowed dark:text-gray-900;
 	}
+
+	.error-message{
+		@apply inline-block p-2 bg-red-400 rounded
+	}
 }

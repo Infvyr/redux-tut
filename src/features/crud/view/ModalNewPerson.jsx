@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import Button from 'components/Button';
-import { initialFormState } from 'features/crud/context/Crud.context';
-import { addNewPerson } from 'features/crud/slices/peopleSlice';
+import { initialFormState } from 'features/crud/data/initalState';
+import { addNewPerson } from 'features/crud/thunks';
 import { Fragment, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ReactComponent as Spinner } from 'assets/images/spinner.svg';
@@ -15,6 +15,7 @@ function ModalNewPerson({ isOpen, closeModal }) {
 	const [addRequestStatus, setAddRequestStatus] = useState(
 		initialAddRequestStatus
 	);
+	const [error, setError] = useState(null);
 
 	const onFirstNameChanged = e =>
 		setForm({ ...form, firstName: e.target.value });
@@ -42,14 +43,14 @@ function ModalNewPerson({ isOpen, closeModal }) {
 		form.lastName,
 	]);
 
-	const onAddNewPerson = e => {
+	const onAddNewPerson = async e => {
 		e.preventDefault();
 
 		if (canSave) {
 			try {
 				setAddRequestStatus('pending');
 
-				dispatch(
+				await dispatch(
 					addNewPerson({
 						firstName: form.firstName?.trim(),
 						lastName: form.lastName?.trim(),
@@ -61,8 +62,15 @@ function ModalNewPerson({ isOpen, closeModal }) {
 
 				setForm(initialFormState);
 				closeModal();
+				// toast success
 			} catch (e) {
-				console.error('Failed to create new person', e);
+				setError(e);
+				setForm(initialFormState);
+				// toast error instead of timeout
+				window.setTimeout(() => {
+					setError(null);
+					closeModal();
+				}, 3000);
 			} finally {
 				setAddRequestStatus(initialAddRequestStatus);
 			}
@@ -203,6 +211,8 @@ function ModalNewPerson({ isOpen, closeModal }) {
 												/>
 											</div>
 										</div>
+
+										{error && <p className="mt-8 error-message">{error}</p>}
 
 										<footer className="my-8 flex gap-x-4">
 											<Button
