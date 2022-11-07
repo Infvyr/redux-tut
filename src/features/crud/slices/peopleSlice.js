@@ -55,7 +55,6 @@ export const updatePerson = createAsyncThunk(
 	'people/updatePerson',
 	async (initialPerson, { rejectWithValue }) => {
 		try {
-			console.log(initialPerson);
 			const response = await fetch(`${USERS_URL}/${initialPerson.id}`, {
 				method: 'PUT',
 				body: JSON.stringify({
@@ -79,12 +78,24 @@ export const updatePerson = createAsyncThunk(
 	}
 );
 
+const onPersonUpdate = (state, action) => {
+	const { id, firstName, lastName, birthDate, email, address } = action.payload;
+	const existingPerson = state.people.find(person => person.id === id);
+	if (existingPerson) {
+		existingPerson.firstName = firstName;
+		existingPerson.lastName = lastName;
+		existingPerson.birthDate = birthDate;
+		existingPerson.email = email;
+		existingPerson.address = address;
+	}
+};
+
 export const peopleSlice = createSlice({
 	name: 'people',
 	initialState,
 	reducers: {
-		updatePeople: (state, action) => {
-			console.log('Actions = ', action);
+		updatePersonState: (state, action) => {
+			onPersonUpdate(state, action);
 		},
 	},
 	extraReducers(builder) {
@@ -106,16 +117,7 @@ export const peopleSlice = createSlice({
 				state.people.unshift(action.payload);
 			})
 			.addCase(updatePerson.fulfilled, (state, action) => {
-				const { id, firstName, lastName, birthDate, email, address } =
-					action.payload;
-				const existingPost = state.people.find(person => person.id === id);
-				if (existingPost) {
-					existingPost.firstName = firstName;
-					existingPost.lastName = lastName;
-					existingPost.birthDate = birthDate;
-					existingPost.email = email;
-					existingPost.address = address;
-				}
+				onPersonUpdate(state, action);
 			});
 	},
 });
@@ -124,6 +126,6 @@ export const selectPeople = state => state.people.people;
 export const getPeopleStatus = state => state.people.status;
 export const getPeopleError = state => state.people.error;
 
-export const { updatePeople } = peopleSlice.actions;
+export const { updatePersonState } = peopleSlice.actions;
 
 export default peopleSlice.reducer;

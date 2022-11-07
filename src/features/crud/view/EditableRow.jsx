@@ -1,7 +1,7 @@
 import {
 	selectPeople,
-	updatePeople,
 	updatePerson,
+	updatePersonState,
 } from 'features/crud/slices/peopleSlice';
 import TableActions from 'features/crud/view/TableActions';
 import { useState } from 'react';
@@ -36,17 +36,17 @@ function EditableRow({ personId, setPersonId }) {
 
 	const handleEditRow = () => {
 		try {
-			dispatch(
-				updatePerson({
-					id: personId,
-					firstName: editData.firstName,
-					lastName: editData.lastName,
-					birthDate: editData.birthDate,
-					email: editData.email,
-					address: editData.address,
-				})
-			);
-			dispatch(updatePeople());
+			const newPersonData = {
+				id: personId,
+				firstName: editData.firstName,
+				lastName: editData.lastName,
+				birthDate: editData.birthDate,
+				email: editData.email,
+				address: { address: editData.address },
+			};
+
+			dispatch(updatePerson(newPersonData));
+			dispatch(updatePersonState(newPersonData));
 
 			cancelEditRow();
 		} catch (e) {
