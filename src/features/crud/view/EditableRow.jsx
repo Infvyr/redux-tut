@@ -13,14 +13,18 @@ function EditableRow({ personId, setPersonId }) {
 	const dispatch = useDispatch();
 	const people = useSelector(selectPeople);
 	const existingPerson = people.slice().find(person => person.id === personId);
-
-	const [editData, setEditData] = useState({
+	const initialState = {
 		firstName: existingPerson.firstName,
 		lastName: existingPerson.lastName,
 		birthDate: existingPerson.birthDate,
 		email: existingPerson.email,
 		address: existingPerson.address.address,
-	});
+	};
+
+	const [editData, setEditData] = useState(initialState);
+
+	const initialData = Object.values(initialState);
+	const initialEditData = Object.values(editData);
 
 	const onEditFirstName = e =>
 		setEditData({ ...editData, firstName: e.target.value });
@@ -31,6 +35,8 @@ function EditableRow({ personId, setPersonId }) {
 	const onEditEmail = e => setEditData({ ...editData, email: e.target.value });
 	const onEditAddress = e =>
 		setEditData({ ...editData, address: e.target.value });
+
+	const canUpdate = initialData.every(elem => initialEditData.includes(elem));
 
 	const cancelEditRow = () => setPersonId(null);
 
@@ -115,6 +121,7 @@ function EditableRow({ personId, setPersonId }) {
 				<TableActions
 					onEditRow={handleEditRow}
 					cancelEditRow={cancelEditRow}
+					isDisabled={canUpdate}
 					isEditable
 				/>
 			</td>

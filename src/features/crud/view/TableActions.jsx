@@ -6,6 +6,7 @@ function TableActions({
 	onEdit,
 	onEditRow,
 	cancelEditRow,
+	isDisabled,
 	isEditable,
 }) {
 	return (
@@ -15,6 +16,7 @@ function TableActions({
 					<Button
 						className="!px-2 !min-h-[28px] btn-primary"
 						title="Save"
+						disabled={isDisabled}
 						onClick={onEditRow}
 					>
 						<Save size="16" />
