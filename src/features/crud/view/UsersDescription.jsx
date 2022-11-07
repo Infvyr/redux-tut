@@ -6,7 +6,6 @@ function UsersDescription() {
 				<p className="mt-2">
 					A list of users in your account including their name, city, email and
 					company. <br />
-					Some columns don't update because of jsonplaceholder fake API.
 				</p>
 			</div>
 		</div>
