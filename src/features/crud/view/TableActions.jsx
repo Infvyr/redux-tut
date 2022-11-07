@@ -1,6 +1,7 @@
 import Button from 'components/Button';
 import { deletePerson } from 'features/crud/thunks';
 import { Edit, FormClose, Save, Trash } from 'grommet-icons';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 
 function TableActions({
@@ -16,10 +17,9 @@ function TableActions({
 	const onDelete = async id => {
 		try {
 			await dispatch(deletePerson(id)).unwrap();
-			// toast success
+			toast.success('Successfully deleted!');
 		} catch (e) {
-			// toast error
-			console.error('onDelete person', e);
+			toast.error(e);
 		}
 	};
 

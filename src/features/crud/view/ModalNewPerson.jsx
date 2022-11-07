@@ -3,6 +3,7 @@ import Button from 'components/Button';
 import { initialFormState } from 'features/crud/data/initalState';
 import { addNewPerson } from 'features/crud/thunks';
 import { Fragment, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { ReactComponent as Spinner } from 'assets/images/spinner.svg';
 
@@ -15,7 +16,6 @@ function ModalNewPerson({ isOpen, closeModal }) {
 	const [addRequestStatus, setAddRequestStatus] = useState(
 		initialAddRequestStatus
 	);
-	const [error, setError] = useState(null);
 
 	const onFirstNameChanged = e =>
 		setForm({ ...form, firstName: e.target.value });
@@ -60,19 +60,13 @@ function ModalNewPerson({ isOpen, closeModal }) {
 					})
 				).unwrap();
 
-				setForm(initialFormState);
-				closeModal();
-				// toast success
+				toast.success('Successfully added!');
 			} catch (e) {
-				setError(e);
-				setForm(initialFormState);
-				// toast error instead of timeout
-				window.setTimeout(() => {
-					setError(null);
-					closeModal();
-				}, 3000);
+				toast.error(e);
 			} finally {
 				setAddRequestStatus(initialAddRequestStatus);
+				setForm(initialFormState);
+				closeModal();
 			}
 		}
 	};
@@ -211,8 +205,6 @@ function ModalNewPerson({ isOpen, closeModal }) {
 												/>
 											</div>
 										</div>
-
-										{error && <p className="mt-8 error-message">{error}</p>}
 
 										<footer className="my-8 flex gap-x-4">
 											<Button

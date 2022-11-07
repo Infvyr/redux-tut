@@ -1,3 +1,4 @@
+import CustomToaster from 'components/CustomToaster';
 import PageHeader from 'components/PageHeader';
 import Space from 'components/Space';
 import {
@@ -63,6 +64,7 @@ function UsersLayout() {
 					</div>
 				</div>
 			</div>
+			<CustomToaster />
 		</>
 	);
 }

@@ -12,7 +12,9 @@ export const addNewPerson = createAsyncThunk(
 			});
 
 			if (!response.ok) {
-				throw new Error('Sorry, a server error has occurred!');
+				throw new Error(
+					'Sorry, A server error has occurred! Could not create a new person.'
+				);
 			}
 
 			return await response.json();

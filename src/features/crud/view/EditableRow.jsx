@@ -2,6 +2,7 @@ import { selectPeople } from 'features/crud/slices/peopleSlice';
 import { updatePerson } from 'features/crud/thunks';
 import TableActions from 'features/crud/view/TableActions';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 
 const tableCellClassName = 'px-3 py-[0.6875rem] whitespace-nowrap';
@@ -49,12 +50,11 @@ function EditableRow({ personId, setPersonId }) {
 			};
 
 			await dispatch(updatePerson(newPersonData)).unwrap();
-			await cancelEditRow();
-			// toast success
+			toast.success('Successfully edited!');
 		} catch (e) {
-			// toast error
-			await cancelEditRow();
-			console.error('Failed to update person', e);
+			toast.error(e);
+		} finally {
+			cancelEditRow();
 		}
 	};
 
