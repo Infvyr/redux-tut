@@ -20,7 +20,7 @@ function Navbar() {
 								end={url === '/'}
 							>
 								<span className={styles.icon}>{icon}</span>
-								<span>{name}</span>
+								<span className={styles.name}>{name}</span>
 							</NavLink>
 						</li>
 					))}

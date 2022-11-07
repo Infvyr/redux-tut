@@ -1,9 +1,29 @@
 .ul {
-	@apply flex flex-col gap-y-2;
+	@apply flex  sm:flex-col gap-y-2 overflow-x-auto snap-x
+}
+
+.li{
+	@apply snap-start min-w-[50%] sm:min-w-[unset]
+}
+
+.li:hover .nav-link {
+	@apply bg-amber-100 dark:bg-gray-700 dark:text-white;
+}
+
+.li:hover .nav-link span {
+	@apply last:dark:text-white;
+}
+
+.li:hover .nav-link svg > g {
+	@apply dark:fill-white;
+}
+
+.li:hover .nav-link svg > path {
+	@apply dark:!stroke-white;
 }
 
 .nav-link {
-	@apply flex items-center gap-x-2 px-5 py-2 transition-colors dark:text-white;
+	@apply flex items-center gap-x-2 w-full px-5 py-2 transition-colors dark:text-white;
 }
 
 .nav-link span {
@@ -37,25 +57,13 @@
 }
 
 .icon {
-	@apply w-5 h-5 inline-flex place-items-center;
+	@apply w-5 h-5 inline-flex place-items-center
+}
+
+.name{
+	@apply grow shrink basis-8/12
 }
 
 .active {
 	@apply bg-amber-100 text-black;
-}
-
-.li:hover .nav-link {
-	@apply bg-amber-100 dark:bg-gray-700 dark:text-white;
-}
-
-.li:hover .nav-link span {
-	@apply last:dark:text-white;
-}
-
-.li:hover .nav-link svg > g {
-	@apply dark:fill-white;
-}
-
-.li:hover .nav-link svg > path {
-	@apply dark:!stroke-white;
 }
