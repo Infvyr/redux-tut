@@ -4,19 +4,7 @@
 
 @layer base {
 	body {
-		@apply text-gray-900 bg-gray-100 font-sans antialiased;
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	p,
-	div,
-	span {
-		@apply dark:text-white;
+		@apply text-gray-900 bg-gray-100 dark:text-white font-sans antialiased;
 	}
 
 	h1 {

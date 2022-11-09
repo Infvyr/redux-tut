@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import Button from 'components/Button';
 import { initialFormState } from 'features/crud/data/initalState';
 import { addNewPerson } from 'features/crud/thunks';
-import { Fragment, useMemo, useState } from 'react';
+import { Fragment, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { ReactComponent as Spinner } from 'assets/images/spinner.svg';
@@ -11,37 +11,22 @@ const initialAddRequestStatus = 'idle';
 
 function ModalNewPerson({ isOpen, closeModal }) {
 	const dispatch = useDispatch();
-
-	const [form, setForm] = useState(initialFormState);
+	const [formState, setFormState] = useState(initialFormState);
 	const [addRequestStatus, setAddRequestStatus] = useState(
 		initialAddRequestStatus
 	);
 
-	const onFirstNameChanged = e =>
-		setForm({ ...form, firstName: e.target.value });
-	const onLastNameChanged = e => setForm({ ...form, lastName: e.target.value });
-	const onBDayChanged = e => setForm({ ...form, birthDate: e.target.value });
-	const onEmailChanged = e => setForm({ ...form, email: e.target.value });
-	const onAddressChanged = e => setForm({ ...form, address: e.target.value });
+	const handleChange = e =>
+		setFormState({ ...formState, [e.target.name]: e.target.value });
 
-	const canSave = useMemo(() => {
-		return (
-			[
-				form.firstName,
-				form.lastName,
-				form.email,
-				form.birthDate,
-				form.address,
-			].every(Boolean) && addRequestStatus === 'idle'
-		);
-	}, [
-		addRequestStatus,
-		form.address,
-		form.birthDate,
-		form.email,
-		form.firstName,
-		form.lastName,
-	]);
+	const canSave =
+		[
+			formState.firstName,
+			formState.lastName,
+			formState.email,
+			formState.birthDate,
+			formState.address,
+		].every(Boolean) && addRequestStatus === 'idle';
 
 	const onAddNewPerson = async e => {
 		e.preventDefault();
@@ -52,11 +37,11 @@ function ModalNewPerson({ isOpen, closeModal }) {
 
 				await dispatch(
 					addNewPerson({
-						firstName: form.firstName?.trim(),
-						lastName: form.lastName?.trim(),
-						birthDate: form.birthDate?.trim(),
-						email: form.email?.trim(),
-						address: { address: form.address?.trim() },
+						firstName: formState.firstName?.trim(),
+						lastName: formState.lastName?.trim(),
+						birthDate: formState.birthDate?.trim(),
+						email: formState.email?.trim(),
+						address: { address: formState.address?.trim() },
 					})
 				).unwrap();
 
@@ -65,7 +50,7 @@ function ModalNewPerson({ isOpen, closeModal }) {
 				toast.error(e);
 			} finally {
 				setAddRequestStatus(initialAddRequestStatus);
-				setForm(initialFormState);
+				setFormState(initialFormState);
 				closeModal();
 			}
 		}
@@ -129,10 +114,11 @@ function ModalNewPerson({ isOpen, closeModal }) {
 												</label>
 												<input
 													id="firstName"
+													name="firstName"
 													type="text"
 													className="mt-2 w-full"
-													value={form.firstName || ''}
-													onChange={onFirstNameChanged}
+													value={formState.firstName || ''}
+													onChange={handleChange}
 													required
 												/>
 											</div>
@@ -146,10 +132,11 @@ function ModalNewPerson({ isOpen, closeModal }) {
 												</label>
 												<input
 													id="lastName"
+													name="lastName"
 													type="text"
 													className="mt-2 w-full"
-													value={form.lastName || ''}
-													onChange={onLastNameChanged}
+													value={formState.lastName || ''}
+													onChange={handleChange}
 													required
 												/>
 											</div>
@@ -163,27 +150,29 @@ function ModalNewPerson({ isOpen, closeModal }) {
 												</label>
 												<input
 													id="email"
+													name="email"
 													type="email"
 													className="mt-2 w-full"
-													value={form.email || ''}
-													onChange={onEmailChanged}
+													value={formState.email || ''}
+													onChange={handleChange}
 													required
 												/>
 											</div>
 
 											<div>
-												<label htmlFor="bDate">
+												<label htmlFor="birthDate">
 													Birthdate{' '}
 													<span title="Required" className="text-red-600">
 														*
 													</span>
 												</label>
 												<input
-													id="bDate"
+													id="birthDate"
+													name="birthDate"
 													type="date"
 													className="mt-2 w-full"
-													value={form.birthDate || ''}
-													onChange={onBDayChanged}
+													value={formState.birthDate || ''}
+													onChange={handleChange}
 													required
 												/>
 											</div>
@@ -197,10 +186,11 @@ function ModalNewPerson({ isOpen, closeModal }) {
 												</label>
 												<input
 													id="address"
+													name="address"
 													type="text"
 													className="mt-2 w-full"
-													value={form.address || ''}
-													onChange={onAddressChanged}
+													value={formState.address || ''}
+													onChange={handleChange}
 													required
 												/>
 											</div>
