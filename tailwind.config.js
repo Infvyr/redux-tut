@@ -5,6 +5,9 @@ module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	theme: {
 		extend: {
+			screens: {
+				'3xl': '1800px',
+			},
 			transitionDuration: {
 				DEFAULT: '300ms',
 			},
@@ -23,13 +26,8 @@ module.exports = {
 		plugin(function ({ addUtilities }) {
 			addUtilities({
 				'.no-scrollbar': {
-					/* IE and Edge */
 					'-ms-overflow-style': 'none',
-
-					/* Firefox */
 					'scrollbar-width': 'none',
-
-					/* Safari and Chrome */
 					'&::-webkit-scrollbar': {
 						display: 'none',
 					},

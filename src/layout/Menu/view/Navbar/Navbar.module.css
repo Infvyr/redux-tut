@@ -1,9 +1,9 @@
 .ul {
-	@apply flex  sm:flex-col gap-y-2 overflow-x-auto snap-x
+	@apply flex lg:flex-col gap-y-2 overflow-x-auto snap-x
 }
 
 .li{
-	@apply snap-start min-w-[50%] sm:min-w-[unset]
+	@apply snap-start min-w-[50%] lg:min-w-[unset]
 }
 
 .li:hover .nav-link {

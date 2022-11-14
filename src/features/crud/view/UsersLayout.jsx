@@ -50,7 +50,7 @@ function UsersLayout() {
 		<>
 			<PageHeader backTo="/redux" />
 			<Space />
-			<div className="card h-screen xl:h-[calc(100%-122px)]">
+			<div className="card xl:h-[calc(100%-122px)]">
 				<UsersDescription />
 				<TablePanel />
 

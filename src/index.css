@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+	#root{
+		@apply mx-auto 3xl:max-w-[1760px]
+	}
+
 	body {
-		@apply text-gray-900 bg-gray-100 dark:text-white font-sans antialiased;
+		@apply text-gray-900 bg-gray-100 dark:bg-gray-900 dark:text-white font-sans antialiased;
 	}
 
 	h1 {
@@ -31,7 +35,7 @@
 
 	input,
 	select {
-		@apply min-h-[34px];
+		@apply min-h-[34px] md:min-h-[36px];
 	}
 
 	select {
