@@ -5,6 +5,7 @@ import {
 	deletePerson,
 	fetchPeople,
 	onPersonUpdate,
+	searchPeople,
 	updatePerson,
 } from 'features/crud/thunks';
 
@@ -42,7 +43,7 @@ export const peopleSlice = createSlice({
 					state.currentRequestId === requestId
 				) {
 					state.status = 'succeeded';
-					let sortedPeople = action.payload.users.sort((a, b) => b.id - a.id);
+					const sortedPeople = action.payload.users.sort((a, b) => b.id - a.id);
 					state.people = state.people.concat(sortedPeople);
 					state.currentRequestId = undefined;
 				}
@@ -74,6 +75,13 @@ export const peopleSlice = createSlice({
 				if (action.payload) {
 					state.error = action.payload;
 				}
+			})
+			.addCase(searchPeople.pending, (state, action) => {
+				state.status = 'pending';
+			})
+			.addCase(searchPeople.fulfilled, (state, action) => {
+				state.people = action.payload.users;
+				state.status = 'succeeded';
 			});
 	},
 });
