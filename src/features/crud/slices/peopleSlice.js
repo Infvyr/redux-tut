@@ -38,14 +38,17 @@ export const peopleSlice = createSlice({
 			})
 			.addCase(fetchPeople.fulfilled, (state, action) => {
 				const { requestId } = action.meta;
+				const sortedPeople = action.payload.users.sort((a, b) => b.id - a.id);
+
 				if (
 					state.status === 'pending' &&
 					state.currentRequestId === requestId
 				) {
 					state.status = 'succeeded';
-					const sortedPeople = action.payload.users.sort((a, b) => b.id - a.id);
 					state.people = state.people.concat(sortedPeople);
 					state.currentRequestId = undefined;
+				} else {
+					state.people = sortedPeople;
 				}
 			})
 			.addCase(addNewPerson.pending, (state, action) => {
@@ -76,12 +79,12 @@ export const peopleSlice = createSlice({
 					state.error = action.payload;
 				}
 			})
-			.addCase(searchPeople.pending, (state, action) => {
+			.addCase(searchPeople.pending, state => {
 				state.status = 'pending';
 			})
 			.addCase(searchPeople.fulfilled, (state, action) => {
-				state.people = action.payload.users;
 				state.status = 'succeeded';
+				state.people = action.payload.users;
 			});
 	},
 });
