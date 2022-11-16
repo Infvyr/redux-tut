@@ -107,7 +107,7 @@ function ModalNewPerson({ isOpen, closeModal }) {
 										<div className="grid grid-cols-1 gap-5 mt-4 sm:grid-cols-2">
 											<div>
 												<label htmlFor="firstName">
-													First Name{' '}
+													First Name &nbsp;
 													<span title="Required" className="text-red-600">
 														*
 													</span>
@@ -125,7 +125,7 @@ function ModalNewPerson({ isOpen, closeModal }) {
 
 											<div>
 												<label htmlFor="lastName">
-													Last Name{' '}
+													Last Name &nbsp;
 													<span title="Required" className="text-red-600">
 														*
 													</span>
@@ -143,7 +143,7 @@ function ModalNewPerson({ isOpen, closeModal }) {
 
 											<div>
 												<label htmlFor="email">
-													Email{' '}
+													Email &nbsp;
 													<span title="Required" className="text-red-600">
 														*
 													</span>
@@ -161,7 +161,7 @@ function ModalNewPerson({ isOpen, closeModal }) {
 
 											<div>
 												<label htmlFor="birthDate">
-													Birthdate{' '}
+													Birthdate &nbsp;
 													<span title="Required" className="text-red-600">
 														*
 													</span>
@@ -177,9 +177,9 @@ function ModalNewPerson({ isOpen, closeModal }) {
 												/>
 											</div>
 
-											<div className="col-span-2">
+											<div className="sm:col-span-2">
 												<label htmlFor="address">
-													Address{' '}
+													Address &nbsp;
 													<span title="Required" className="text-red-600">
 														*
 													</span>
