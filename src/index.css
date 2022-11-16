@@ -50,6 +50,10 @@
 		@apply duration-300;
 	}
 
+	p > a{
+		@apply underline
+	}
+
 	button svg[aria-label='Save'],
 	button svg[aria-label='Edit'],
 	button svg[aria-label='Trash'],
