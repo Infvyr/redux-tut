@@ -1,6 +1,5 @@
 import CustomToaster from 'components/CustomToaster';
 import PageHeader from 'components/PageHeader';
-import Space from 'components/Space';
 import {
 	getPeopleError,
 	getPeopleStatus,
@@ -19,11 +18,11 @@ function UsersLayout() {
 	const dispatch = useDispatch();
 	const peopleStatus = useSelector(getPeopleStatus);
 	const peopleError = useSelector(getPeopleError);
-	const runRef = useRef(false);
+	const dataFetchedRef = useRef(false);
 
 	useEffect(() => {
-		if (runRef.current) return;
-		runRef.current = true;
+		if (dataFetchedRef.current) return;
+		dataFetchedRef.current = true;
 		if (peopleStatus === 'idle') {
 			dispatch(fetchPeople());
 		}
@@ -49,8 +48,8 @@ function UsersLayout() {
 	return (
 		<>
 			<PageHeader backTo="/redux" />
-			<Space />
-			<div className="card xl:h-[calc(100%-122px)]">
+
+			<div className="card grow">
 				<UsersDescription />
 				<TablePanel />
 

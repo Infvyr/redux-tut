@@ -20,10 +20,12 @@ function ApiPostsListing() {
 	const postsError = useSelector(getPostsError);
 
 	useEffect(() => {
-		dispatch(fetchPosts());
-	}, [dispatch]);
+		if (postsStatus === 'idle') {
+			dispatch(fetchPosts());
+		}
+	}, [dispatch, postsStatus]);
 
-	if (postsStatus === 'loading') {
+	if (postsStatus === 'pending') {
 		content = <p>Loading...</p>;
 	}
 
@@ -31,6 +33,7 @@ function ApiPostsListing() {
 		const orderedPosts = posts
 			.slice()
 			.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+
 		content = orderedPosts.map(post => {
 			const { id, title, body, createdAt, userId } = post;
 			const excerpt = body.substring(0, 100);
@@ -63,7 +66,7 @@ function ApiPostsListing() {
 			<h2 className="md:text-3xl">List of posts</h2>
 			<Space twHeight="h-6 lg:h-[52px]" />
 
-			<div className="flex flex-col gap-y-5 no-scrollbar overflow-auto h-[calc(100vh-210px)]">
+			<div className="flex flex-col gap-y-5 no-scrollbar overflow-auto">
 				{content}
 			</div>
 		</section>

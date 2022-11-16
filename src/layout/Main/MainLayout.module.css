@@ -1,3 +1,7 @@
 .main {
 	@apply w-full md:container mx-auto p-5 dark:bg-gray-900;
 }
+
+.inner{
+	@apply flex flex-col gap-6 min-h-full
+}

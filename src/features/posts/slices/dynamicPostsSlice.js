@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
-import { handlePendingStatus, handleRejectedStatus } from 'app/redux/errors';
+import { handlePendingStatus } from 'app/redux/errors';
 import sub from 'date-fns/sub';
 
 const POSTS_URL = process.env.REACT_APP_POSTS;
 
 const initialState = {
 	postsApi: [],
-	status: 'idle', // idle | loading | succeeded | failed
+	status: 'idle', // idle | pending | succeeded | failed
 	error: null,
+	currentRequestId: undefined,
 };
 
 export const fetchPosts = createAsyncThunk(
@@ -20,9 +21,7 @@ export const fetchPosts = createAsyncThunk(
 				throw new Error('Server error!');
 			}
 
-			const data = await response.json();
-
-			return data;
+			return await response.json();
 		} catch (e) {
 			return rejectWithValue(e.message);
 		}
@@ -45,9 +44,7 @@ export const addNewPost = createAsyncThunk(
 				throw new Error('Server error!');
 			}
 
-			const data = await response.json();
-
-			return data;
+			return await response.json();
 		} catch (e) {
 			return rejectWithValue(e.message);
 		}
@@ -93,9 +90,16 @@ export const postsApiSlice = createSlice({
 			.addCase(fetchPosts.pending, state => {
 				handlePendingStatus(state);
 			})
+			.addCase(fetchPosts.rejected, (state, action) => {
+				if (state.status === 'idle') {
+					state.status = 'pending';
+					state.error = action.payload;
+				}
+			})
 			.addCase(fetchPosts.fulfilled, (state, action) => {
-				if (state.status === 'loading') {
+				if (state.status === 'pending') {
 					state.status = 'succeeded';
+					state.currentRequestId = undefined;
 
 					// adding date and reactions
 					let min = 1;
@@ -115,9 +119,6 @@ export const postsApiSlice = createSlice({
 					state.postsApi = state.postsApi.concat(loadedPosts);
 				}
 			})
-			.addCase(fetchPosts.rejected, (state, action) => {
-				handleRejectedStatus(state, action);
-			})
 			.addCase(addNewPost.fulfilled, (state, action) => {
 				action.payload.userId = Number(action.payload.userId);
 				action.payload.createdAt = new Date().toISOString();
@@ -128,6 +129,7 @@ export const postsApiSlice = createSlice({
 					coffee: 0,
 				};
 
+				state.status = 'succeeded';
 				state.postsApi.push(action.payload);
 			});
 	},

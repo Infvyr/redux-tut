@@ -34,15 +34,15 @@ function ApiPostForm() {
 			try {
 				setAddRequestStatus('pending');
 
-				dispatch(addNewPost({ title, body, userId })).unwrap();
+				dispatch(addNewPost({ title, body, userId }))
+					.unwrap()
+					.finally(() => setAddRequestStatus('idle'));
 
 				setTitle('');
 				setBody('');
 				setUserId('');
 			} catch (e) {
 				console.error('Failed to save the post', e);
-			} finally {
-				setAddRequestStatus('idle');
 			}
 		}
 	};
@@ -89,7 +89,7 @@ function ApiPostForm() {
 						<select id="postAuthor" value={userId} onChange={onAuthorChanged}>
 							<option value="">
 								{usersStatus === 'idle' && null}
-								{usersStatus === 'loading' && '...'}
+								{usersStatus === 'pending' && '...'}
 								{usersStatus === 'succeeded' && 'Select an author'}
 							</option>
 							{userOptions}

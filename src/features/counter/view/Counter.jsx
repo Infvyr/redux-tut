@@ -32,11 +32,10 @@ function Counter() {
 	};
 
 	return (
-		<div>
+		<>
 			<PageHeader backTo={-1} />
-			<Space />
 
-			<div className="card h-screen">
+			<div className="card grow">
 				<header className={styles.group}>
 					<Button
 						className="btn-danger"
@@ -83,7 +82,7 @@ function Counter() {
 					</Button>
 				</footer>
 			</div>
-		</div>
+		</>
 	);
 }
 

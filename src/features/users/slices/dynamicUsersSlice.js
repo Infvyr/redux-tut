@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { handlePendingStatus } from 'app/redux/errors';
 
 const USERS_URL = process.env.REACT_APP_USERS;
 
@@ -18,9 +19,7 @@ export const fetchUsers = createAsyncThunk(
 				throw new Error('An error has been encountered!');
 			}
 
-			const data = await response.json();
-
-			return data;
+			return await response.json();
 		} catch (e) {
 			return rejectWithValue(e.message);
 		}
@@ -33,17 +32,13 @@ export const usersApiSlice = createSlice({
 	reducers: {},
 	extraReducers(builder) {
 		builder
-			.addCase(fetchUsers.pending, state => {
-				if (state.status === 'idle') {
-					state.status = 'loading';
-					state.error = null;
-				}
+			.addCase(fetchUsers.pending, (state, action) => {
+				handlePendingStatus(state, action);
 			})
 			.addCase(fetchUsers.fulfilled, (state, action) => {
-				if (state.status === 'loading') {
+				if (state.status === 'pending') {
 					state.status = 'succeeded';
-					state.usersApi.push(...action.payload);
-					// return action.payload
+					state.usersApi = action.payload;
 				}
 			})
 			.addCase(fetchUsers.rejected, (state, action) => {
